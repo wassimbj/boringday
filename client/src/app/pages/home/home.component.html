@@ -1,7 +1,7 @@
-<div class="bg-black pt-10 px-10 pb-2">
+<div class="bg-black pt-5 pb-10 px-10">
   <div class="flex items-center">
     <div class="flex-1">
-      <h1 class="text-white text-2xl">client</h1>
+      <h1 class="text-white text-2xl font-black">boringday</h1>
     </div>
     <div class="flex-1">
       <div class="flex justify-end">
@@ -20,7 +20,10 @@
   <!-- calendar -->
   <div class="mt-10">
     <div class="flex space-x-4 items-center justify-center">
-      <button class="rounded-full p-1 hover:bg-slate-900 active:scale-95">
+      <button
+        (click)="handleChangeMonth('prev')"
+        class="rounded-full p-1 hover:bg-slate-900 active:scale-95"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="22"
@@ -48,7 +51,10 @@
           {{ currentMonth | dfnsFormat: "yyyy" }}
         </span>
       </div>
-      <button class="rounded-full p-1 hover:bg-slate-900 active:scale-95">
+      <button
+        (click)="handleChangeMonth('next')"
+        class="rounded-full p-1 hover:bg-slate-900 active:scale-95"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="22"
@@ -95,17 +101,30 @@
           id="weekDates"
           class="py-2 flex items-center space-x-5 overflow-x-auto max-w-2xl"
         >
-          <div
-            *ngFor="let row of rows; index as i"
-            class="flex items-center justify-center flex-col w-20 h-20 p-5 relative transition-colors rounded-full {{
-              row.isToday
+          <button
+            (click)="handleSelectDate(week.day)"
+            *ngFor="let week of weekCells; index as i"
+            class="flex items-center justify-center flex-col w-20 h-20 p-5 relative transition-all rounded-full {{
+              week.isSelectedDate
                 ? 'bg-teal-900 bg-opacity-40 text-teal-300'
-                : 'bg-white bg-opacity-5 hover:bg-opacity-10 cursor-pointer'
+                : 'bg-white active:scale-90 bg-opacity-5 hover:bg-opacity-10 cursor-pointer'
             }}"
           >
-            <span class="font-semibold text-lg">{{ row.dayDate }}</span>
-            <span class="text-sm font-light">{{ row.dayName }}</span>
-          </div>
+            <span class="font-semibold text-lg">{{ week.dayDate }}</span>
+            <span class="text-sm font-light">{{ week.dayName }}</span>
+            <span
+              class="absolute bottom-1 w-1 h-1 bg-teal-400 rounded-full {{
+                week.isToday ? 'block' : 'hidden'
+              }}"
+            ></span>
+
+            <!-- showen when there is data in this date -->
+            <span
+              class="absolute bottom-1 {{
+                week.isToday ? 'ml-3' : ''
+              }} w-1 h-1 bg-red-400 rounded-full"
+            ></span>
+          </button>
         </div>
         <button
           (click)="handleChangeWeek('next')"
