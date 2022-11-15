@@ -1,0 +1,165 @@
+<div class="bg-black pt-10 px-10 pb-2">
+  <div class="flex items-center">
+    <div class="flex-1">
+      <h1 class="text-white text-2xl">client</h1>
+    </div>
+    <div class="flex-1">
+      <div class="flex justify-end">
+        <div class="flex items-center">
+          <a
+            routerLink="/create"
+            class="hover:bg-green-400 cursor-pointer bg-green-500 delay-75 duration-100 text-white text-sm font-semibold rounded-full w-full active:translate-y-0.5 py-3 px-5 border-b-4 active:border-b-0 border-b-green-600"
+          >
+            New plan
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- calendar -->
+  <div class="mt-10">
+    <div class="flex space-x-4 items-center justify-center">
+      <button class="rounded-full p-1 hover:bg-slate-900 active:scale-95">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            stroke="#ccc"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-miterlimit="10"
+            stroke-width="1.5"
+            d="M15 19.92L8.48 13.4c-.77-.77-.77-2.03 0-2.8L15 4.08"
+          ></path>
+        </svg>
+      </button>
+      <div
+        class="text-xl px-5 py-1 text-gray-200 text-center block mx-auto space-x-2"
+      >
+        <span class="inline-block">
+          {{ currentMonth | dfnsFormat: "MMMM" }}
+        </span>
+        <span class="inline-block">
+          {{ currentMonth | dfnsFormat: "yyyy" }}
+        </span>
+      </div>
+      <button class="rounded-full p-1 hover:bg-slate-900 active:scale-95">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            stroke="#ccc"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-miterlimit="10"
+            stroke-width="1.5"
+            d="M8.91 19.92l6.52-6.52c.77-.77.77-2.03 0-2.8L8.91 4.08"
+          ></path>
+        </svg>
+      </button>
+    </div>
+    <!-- <span class=""> 10 Apr 2022 </span> -->
+    <div class="mt-5">
+      <div class="flex items-center justify-center space-x-5 text-white">
+        <button
+          (click)="handleChangeWeek('prev')"
+          class="rounded-full p-1 bg-gray-900 hover:bg-opacity-50 active:scale-95"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="25"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <path
+              stroke="#FFFFFF"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-miterlimit="10"
+              stroke-width="1.5"
+              d="M15 19.92L8.48 13.4c-.77-.77-.77-2.03 0-2.8L15 4.08"
+            ></path>
+          </svg>
+        </button>
+        <div
+          id="weekDates"
+          class="py-2 flex items-center space-x-5 overflow-x-auto max-w-2xl"
+        >
+          <div
+            *ngFor="let row of rows; index as i"
+            class="flex items-center justify-center flex-col w-20 h-20 p-5 relative transition-colors rounded-full {{
+              row.isToday
+                ? 'bg-teal-900 bg-opacity-40 text-teal-300'
+                : 'bg-white bg-opacity-5 hover:bg-opacity-10 cursor-pointer'
+            }}"
+          >
+            <span class="font-semibold text-lg">{{ row.dayDate }}</span>
+            <span class="text-sm font-light">{{ row.dayName }}</span>
+          </div>
+        </div>
+        <button
+          (click)="handleChangeWeek('next')"
+          class="rounded-full p-1 bg-gray-900 hover:bg-opacity-50 active:scale-95"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="25"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <path
+              stroke="#FFFFFF"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-miterlimit="10"
+              stroke-width="1.5"
+              d="M8.91 19.92l6.52-6.52c.77-.77.77-2.03 0-2.8L8.91 4.08"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="max-w-2xl p-5 mx-auto mt-5 space-y-10">
+  <div class="">
+    <div class="flex items-center space-x-2 mb-1">
+      <span class="font-semibold text-lg block"> Today ✨ </span>
+      <span class="block">
+        {{ selectedDate | dfnsFormat: "d LLL yyyy" }}
+      </span>
+    </div>
+    <div class="flex items-center">
+      <span
+        class="flex px-2 py-1 rounded-full font-semibold text-sm bg-[#e6dfdd]"
+        >07:00 am</span
+      >
+      <div
+        class="flex p-3 rounded-md shadow-sm hover:shadow-md transition-shadow cursor-pointer bg-white max-w-md ml-2 font-semibold items-center overflow-hidden"
+      >
+        <span
+          class="p-1 bg-gray-50 mr-1 inline-block rounded-md text-xl"
+          title="Category: Work"
+        >
+          💻
+        </span>
+        <p class="truncate">
+          Ullam odit temporibus voluptas sint sit et
+          doloribusdoloribusdoloribusdoloribus.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+#weekDates::-webkit-scrollbar {
+  width: 10px;
+  height: 5px;
+}
+
+/* Track */
+#weekDates::-webkit-scrollbar-track {
+  /* box-shadow: 0 0 5px #ccc; */
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
+
+/* Handle */
+#weekDates::-webkit-scrollbar-thumb {
+  background: rgb(137, 137, 137);
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+#weekDates::-webkit-scrollbar-thumb:hover {
+  background: #ccc;
+}
