@@ -2,16 +2,17 @@ import express from "express";
 const app = express();
 import TaskController from "./controllers/TaskController";
 
-app.use(express.json())
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
 app.post("/task/create", TaskController.create);
+app.post("/task/update", TaskController.update);
+app.get("/task/delete/:id", TaskController.delete);
+app.get("/task/all/:date", TaskController.getDateTasks);
 
-// TODO: create task
-// TODO: update task
 // TODO: delete task
 // TODO: get date tasks
 // TODO: create category
