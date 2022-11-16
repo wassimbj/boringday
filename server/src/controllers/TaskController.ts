@@ -76,7 +76,7 @@ class TaskController {
   }
 
   // get date tasks
-  public async getDateTasks(req: Request, res: Response) {
+  public async getTasksByDate(req: Request, res: Response) {
     try {
       // console.log(req.body)
 
@@ -84,6 +84,27 @@ class TaskController {
 
       const tasks = await DB.task.findMany({
         where: { date: new Date(date) },
+        include: {
+          Category: {
+            select: { icon: true, name: true },
+          },
+        },
+      });
+
+      return res.status(200).json(tasks);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json("ERROR!");
+    }
+  }
+
+  // get tasks by category
+  public async getTasksByCategory(req: Request, res: Response) {
+    try {
+      const { category } = req.params;
+      console.log(category);
+      const tasks = await DB.task.findMany({
+        where: { categoryId: Number(category) },
       });
 
       return res.status(200).json(tasks);

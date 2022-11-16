@@ -1,4 +1,5 @@
 import express from "express";
+import CategoryController from "./controllers/CategoryController";
 const app = express();
 import TaskController from "./controllers/TaskController";
 
@@ -11,14 +12,13 @@ app.get("/", (req, res) => {
 app.post("/task/create", TaskController.create);
 app.post("/task/update", TaskController.update);
 app.get("/task/delete/:id", TaskController.delete);
-app.get("/task/all/:date", TaskController.getDateTasks);
+app.get("/tasks/:date", TaskController.getTasksByDate);
+app.get("/tasks/c/:category", TaskController.getTasksByCategory);
 
-// TODO: delete task
-// TODO: get date tasks
-// TODO: create category
-// TODO: get tasks by category
-// TODO: get categories
-// TODO: get calendar tasks
+app.post("/category/create", CategoryController.create);
+app.post("/category/update", CategoryController.update);
+app.get("/category/delete/:id", CategoryController.delete);
+app.get("/categories", CategoryController.getCategories);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
