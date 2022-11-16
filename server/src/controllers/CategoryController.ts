@@ -51,6 +51,10 @@ class CategoryController {
     try {
       const { id, name, icon }: CategoryBody = req.body;
 
+      // user can't update the default category
+      if (id === 1) {
+        return res.status(400).json("bad request");
+      }
       await DB.category.update({
         where: { id },
         data: {
@@ -70,6 +74,11 @@ class CategoryController {
   public async delete(req: Request, res: Response) {
     try {
       const { id } = req.params;
+
+      // can't delete the default category
+      if (Number(id) === 1) {
+        return res.status(400).json("bad request");
+      }
 
       await DB.category.delete({
         where: { id: Number(id) },
