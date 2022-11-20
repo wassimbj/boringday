@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import DB from "../db";
-// TODO: get date tasks
+import { addDays, startOfWeek } from "date-fns";
 
 type TaskBody = {
   id: number;
@@ -105,6 +105,24 @@ class TaskController {
       console.log(category);
       const tasks = await DB.task.findMany({
         where: { categoryId: Number(category) },
+      });
+
+      return res.status(200).json(tasks);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json("ERROR!");
+    }
+  }
+
+  // get number of tasks of given week
+  public async getNumberOfTasksOfGivenWeek(req: Request, res: Response) {
+    try {
+      const { date } = req.params; // start of the week 1-31
+      const weekDate = startOfWeek(new Date(date), { weekStartsOn: 1 });
+      const tasks = await DB.task.findMany({
+        where: { date: { gte: weekDate, lte: addDays(weekDate, 6) } },
+        take: 7,
+        select: { date: true },
       });
 
       return res.status(200).json(tasks);

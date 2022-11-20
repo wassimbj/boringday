@@ -13,6 +13,7 @@ app.post("/task/create", TaskController.create);
 app.post("/task/update", TaskController.update);
 app.get("/task/delete/:id", TaskController.delete);
 app.get("/tasks/:date", TaskController.getTasksByDate);
+app.get("/tasks/week/:date", TaskController.getNumberOfTasksOfGivenWeek);
 app.get("/tasks/c/:category", TaskController.getTasksByCategory);
 
 app.post("/category/create", CategoryController.create);
