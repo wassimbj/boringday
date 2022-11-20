@@ -46,8 +46,8 @@ export class HomeComponent implements OnInit {
   }
 
   handleSelectDate(date: Date) {
-    console.log(date);
     this.selectedDate = date;
+    this.getTasks(date);
     this.renderWeekCells();
   }
 
