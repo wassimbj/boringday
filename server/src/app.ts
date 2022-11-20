@@ -2,8 +2,16 @@ import express from "express";
 import CategoryController from "./controllers/CategoryController";
 const app = express();
 import TaskController from "./controllers/TaskController";
+import cors from "cors";
 
 app.use(express.json());
+
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:4200",
+  })
+);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

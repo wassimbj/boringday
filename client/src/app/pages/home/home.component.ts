@@ -11,6 +11,7 @@ import {
   addWeeks,
   subWeeks,
 } from 'date-fns';
+import { TasksService } from 'src/app/services/tasks.service';
 
 @Component({
   selector: 'app-home',
@@ -18,13 +19,14 @@ import {
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  constructor() {}
+  constructor(private tasksService: TasksService) {}
 
   currentMonth = new Date();
   currentWeek = getWeek(this.currentMonth);
 
   weekCells: Array<any> = [];
   selectedDate = new Date();
+
   renderWeekCells() {
     let startDate = startOfWeek(this.currentMonth, { weekStartsOn: 1 });
     let days: Array<any> = [];
@@ -46,7 +48,7 @@ export class HomeComponent implements OnInit {
   handleSelectDate(date: Date) {
     console.log(date);
     this.selectedDate = date;
-    this.renderWeekCells()
+    this.renderWeekCells();
   }
 
   handleChangeWeek(btnType: 'prev' | 'next') {
@@ -73,5 +75,14 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.renderWeekCells();
+    this.getTasks(this.selectedDate);
+  }
+
+  getTasks(selectedDate: Date) {
+    this.tasksService
+      .getTasksByDate(format(selectedDate, 'yyyy-MM-dd'))
+      .subscribe((data) => {
+        console.log(data);
+      });
   }
 }
