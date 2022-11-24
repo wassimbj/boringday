@@ -85,7 +85,7 @@ class TaskController {
       const tasks = await DB.task.findMany({
         where: { date: new Date(date) },
         include: {
-          Category: {
+          category: {
             select: { icon: true, name: true },
           },
         },
@@ -119,10 +119,12 @@ class TaskController {
     try {
       const { date } = req.params; // start of the week 1-31
       const weekDate = startOfWeek(new Date(date), { weekStartsOn: 1 });
-      const tasks = await DB.task.findMany({
+      const tasks = await DB.task.groupBy({
+        by: ["date"],
         where: { date: { gte: weekDate, lte: addDays(weekDate, 6) } },
-        take: 7,
-        select: { date: true },
+        _count: {
+          id: true,
+        },
       });
 
       return res.status(200).json(tasks);

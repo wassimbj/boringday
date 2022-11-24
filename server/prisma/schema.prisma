@@ -19,7 +19,7 @@ model Task {
   createdAt  DateTime  @default(now())
   notes      String
   isDone     Boolean   @default(false)
-  Category   Category? @relation(fields: [categoryId], references: [id])
+  category   Category? @relation(fields: [categoryId], references: [id])
   categoryId Int?
 }
 

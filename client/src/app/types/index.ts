@@ -4,7 +4,8 @@ export type Task = {
   notes: string;
   date: Date;
   time: Date;
-  category: number;
+  categoryId: number;
+  category: Category;
   isDone: boolean;
   createdAt: Date;
 };
@@ -17,7 +18,7 @@ export type CreateTaskBody = {
 };
 
 export type Category = {
-  id: number;
+  id?: number;
   name: string;
   icon: string;
 };

@@ -12,6 +12,7 @@ import {
   subWeeks,
 } from 'date-fns';
 import { TasksService } from 'src/app/services/tasks.service';
+import { Task } from 'src/app/types';
 
 @Component({
   selector: 'app-home',
@@ -24,8 +25,16 @@ export class HomeComponent implements OnInit {
   currentMonth = new Date();
   currentWeek = getWeek(this.currentMonth);
 
+  tasks: { isLoading: boolean; items: Task[] } = {
+    isLoading: true,
+    items: [],
+  };
   weekCells: Array<any> = [];
   selectedDate = new Date();
+
+  newDate(d: string | Date): Date {
+    return new Date(d);
+  }
 
   renderWeekCells() {
     let startDate = startOfWeek(this.currentMonth, { weekStartsOn: 1 });
@@ -45,9 +54,14 @@ export class HomeComponent implements OnInit {
     days = [];
   }
 
+  isTasksEmpty(arr: Array<Task>) {
+    return arr.length;
+  }
+
   handleSelectDate(date: Date) {
     this.selectedDate = date;
     this.getTasks(date);
+    this.tasks.isLoading = true;
     this.renderWeekCells();
   }
 
@@ -82,6 +96,7 @@ export class HomeComponent implements OnInit {
     this.tasksService
       .getTasksByDate(format(selectedDate, 'yyyy-MM-dd'))
       .subscribe((data) => {
+        this.tasks = { isLoading: false, items: data };
         console.log(data);
       });
   }

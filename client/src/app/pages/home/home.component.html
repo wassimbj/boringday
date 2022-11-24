@@ -1,45 +1,4 @@
 <div class="bg-black pt-5 pb-10 px-10">
-  <!-- <div class="flex items-center">
-    <div class="flex-1">
-      <h1 class="text-white text-2xl font-black">boringday</h1>
-    </div>
-    <div class="flex items-center space-x-5">
-      <a routerLink="/categories" class="inline-block rounded-full hover:bg-white/5 text-gray-500 py-2 px-5"> Categories </a>
-      <a routerLink="/" class="inline-block text-gray-300 py-2 px-5 rounded-full bg-white/10">
-        Home
-      </a>
-    </div>
-    <div class="flex-1">
-      <div class="flex justify-end">
-        <div class="relative">
-          <details class="appearance-none relative">
-            <summary
-              class="appearance-none text-center hover:bg-green-400 cursor-pointer bg-green-500 delay-75 duration-100 text-white text-sm font-semibold rounded-full w-44 py-3 px-5 active:translate-y-1 shadow-[0px_3px_rgb(22,163,74)]"
-            >
-              New
-            </summary>
-            <div
-              class="absolute w-full top-12 bg-white rounded-md shadow-lg shadow-gray-600 p-3 overflow-hidden"
-            >
-              <a
-                routerLink="/p/create"
-                class="rounded-md p-2 block hover:bg-gray-100 transition-colors"
-              >
-                Plan
-              </a>
-              <a
-                routerLink="/c/create"
-                class="rounded-md p-2 block hover:bg-gray-100 transition-colors"
-              >
-                Category
-              </a>
-            </div>
-          </details>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
   <!-- calendar -->
   <div class="mt-20">
     <div class="flex space-x-4 items-center justify-center">
@@ -178,29 +137,75 @@
 <div class="max-w-2xl p-5 mx-auto mt-5 space-y-10">
   <div class="">
     <div class="flex items-center space-x-2 mb-1">
-      <span class="font-semibold text-lg block"> Today ✨ </span>
-      <span class="block">
+      <!-- <span class="font-semibold text-lg block"> Today ✨ </span> -->
+      <span class="block font-semibold text-lg">
         {{ selectedDate | dfnsFormat: "d LLL yyyy" }}
       </span>
     </div>
-    <div class="flex items-center">
-      <span
-        class="flex px-2 py-1 rounded-full font-semibold text-sm bg-[#e6dfdd]"
-        >07:00 am</span
-      >
-      <div
-        class="flex p-3 rounded-md shadow-sm hover:shadow-md transition-shadow cursor-pointer bg-white max-w-md ml-2 font-semibold items-center overflow-hidden"
-      >
-        <span
-          class="p-1 bg-gray-50 mr-1 inline-block rounded-md text-xl"
-          title="Category: Work"
-        >
-          💻
+    <div *ngIf="tasks.isLoading">
+      <p class="p-10 mt-5 text-center text-lg">Loading...</p>
+    </div>
+    <div *ngIf="!tasks.isLoading && tasks.items.length === 0">
+      <div class="mt-10 p-5">
+        <span class="text-5xl block text-center mb-3">🎉</span>
+        <span class="block text-center text-lg">
+          Yayyy, you have nothing to do today, <br />
+          try going for a walk
         </span>
-        <p class="truncate">
-          Ullam odit temporibus voluptas sint sit et
-          doloribusdoloribusdoloribusdoloribus.
-        </p>
+      </div>
+    </div>
+
+    <div
+      class="w-full space-y-3"
+      *ngIf="!tasks.isLoading && tasks.items.length > 0"
+    >
+      <div class="flex items-center w-full" *ngFor="let task of tasks.items">
+        <span
+          class="flex px-2 py-1 rounded-full font-semibold text-sm bg-[#e6dfdd]"
+          >{{ newDate(task.time) | dfnsFormat: "hh:mm bbbb" }}</span
+        >
+        <div
+          class="flex w-full p-3 rounded-md shadow-sm hover:shadow-md transition-shadow cursor-pointer bg-white max-w-md ml-2 font-semibold items-center justify-between overflow-hidden"
+        >
+          <div class="flex w-full font-semibold items-center">
+            <span
+              class="p-1 bg-gray-50 mr-1 inline-block rounded-md text-xl"
+              title="Category: Work"
+            >
+              {{ task.category.icon }}
+            </span>
+            <p class="truncate">
+              {{ task.title }}
+            </p>
+          </div>
+          <div>
+            <div class="relative">
+              <details class="appearance-none relative">
+                <summary
+                  class=""
+                >
+                  New
+                </summary>
+                <div
+                  class="absolute w-full top-12 bg-white rounded-md shadow-md p-3 overflow-hidden"
+                >
+                  <a
+                    routerLink="/p/create"
+                    class="rounded-md p-2 block hover:bg-gray-100 transition-colors"
+                  >
+                    Plan
+                  </a>
+                  <a
+                    routerLink="/c/create"
+                    class="rounded-md p-2 block hover:bg-gray-100 transition-colors"
+                  >
+                    Category
+                  </a>
+                </div>
+              </details>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
