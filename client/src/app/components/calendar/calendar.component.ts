@@ -6,7 +6,6 @@ import {
   startOfWeek,
   addDays,
   isSameDay,
-  lastDayOfWeek,
   getWeek,
   addWeeks,
   subWeeks,
@@ -28,10 +27,6 @@ export class CalendarComponent implements OnInit {
   currentWeek = getWeek(this.currentMonth);
   @Output() onSelectDate = new EventEmitter<string>();
 
-  // tasks: { isLoading: boolean; items: Task[] } = {
-  //   isLoading: true,
-  //   items: [],
-  // };
   weekCells: Array<any> = [];
   selectedDate = new Date();
   tasksOfEachDay: Array<{ date: Date; _count: { id: number } }> = [];
@@ -68,11 +63,7 @@ export class CalendarComponent implements OnInit {
   handleSelectDate(date: Date) {
     this.selectedDate = date;
     this.onSelectDate.emit(String(date));
-    // testHandleSelectDate()
-    // this.getTasks(date);
-    // this.tasks.isLoading = true;
     this.renderWeekCells();
-    // this.getWeekDatesTasks(date);
   }
 
   handleChangeWeek(btnType: 'prev' | 'next') {
@@ -94,22 +85,12 @@ export class CalendarComponent implements OnInit {
     if (btnType === 'next') {
       this.currentMonth = addMonths(this.currentMonth, 1);
     }
-    // this.renderWeekCells();
     this.getWeekDatesTasks(this.currentMonth);
   }
 
   ngOnInit(): void {
-    // this.getTasks(this.selectedDate);
     this.getWeekDatesTasks(this.selectedDate);
   }
-
-  // getTasks(selectedDate: Date) {
-  //   this.tasksService
-  //     .getTasksByDate(format(selectedDate, 'yyyy-MM-dd'))
-  //     .subscribe((data) => {
-  //       this.tasks = { isLoading: false, items: data };
-  //     });
-  // }
 
   getWeekDatesTasks(selectedDate: Date) {
     this.tasksService

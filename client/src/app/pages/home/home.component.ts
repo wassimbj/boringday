@@ -1,18 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  format,
-  subMonths,
-  addMonths,
-  startOfWeek,
-  addDays,
-  isSameDay,
-  lastDayOfWeek,
-  getWeek,
-  addWeeks,
-  subWeeks,
-  isSameMonth,
-  isSameYear,
-} from 'date-fns';
+import { format } from 'date-fns';
 import { TasksService } from 'src/app/services/tasks.service';
 import { Task } from 'src/app/types';
 
