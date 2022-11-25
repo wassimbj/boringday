@@ -86,7 +86,9 @@
           <button
             (click)="handleSelectDate(week.day)"
             *ngFor="let week of weekCells; index as i"
-            class="flex items-center justify-center flex-col w-20 h-20 p-5 relative transition-all rounded-full {{
+            class="flex items-center justify-center flex-col w-20 h-20 p-5 relative {{
+              week.isToday ? 'border-2 border-teal-600' : ''
+            }} transition-all rounded-full {{
               week.isSelectedDate
                 ? 'bg-teal-900 bg-opacity-40 text-teal-300'
                 : 'bg-white active:scale-90 bg-opacity-5 hover:bg-opacity-10 cursor-pointer'
@@ -94,19 +96,12 @@
           >
             <span class="font-semibold text-lg">{{ week.dayDate }}</span>
             <span class="text-sm font-light">{{ week.dayName }}</span>
-            <span
-              class="absolute bottom-1 w-1 h-1 bg-teal-400 rounded-full {{
-                week.isToday ? 'block' : 'hidden'
-              }}"
-            ></span>
 
             <!-- showen when there is data in this date -->
             <span
               class="absolute {{
                 week.hasTasksTodo ? 'block' : 'hidden'
-              }} bottom-1 {{
-                week.isToday ? 'ml-3' : ''
-              }} w-1 h-1 text-xs bg-red-400 rounded-full"
+              }} bottom-1 w-1 h-1 text-xs bg-red-400 rounded-full"
             ></span>
           </button>
         </div>
