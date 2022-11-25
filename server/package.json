@@ -25,6 +25,7 @@
     "@prisma/client": "^4.6.1",
     "cors": "^2.8.5",
     "date-fns": "^2.29.3",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "express-session": "^1.17.3"
   }
 }

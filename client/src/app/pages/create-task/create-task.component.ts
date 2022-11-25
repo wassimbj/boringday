@@ -1,15 +1,56 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryService } from 'src/app/services/category.service';
+import { Category } from 'src/app/types';
+import { FormBuilder } from '@angular/forms';
+import { TasksService } from 'src/app/services/tasks.service';
+import { parse, parseISO } from 'date-fns';
 
 @Component({
   selector: 'app-create-task',
   templateUrl: './create-task.component.html',
-  styleUrls: ['./create-task.component.css']
+  styleUrls: ['./create-task.component.css'],
 })
 export class CreateTaskComponent implements OnInit {
+  constructor(
+    private categoryService: CategoryService,
+    private taskService: TasksService,
+    private formBuilder: FormBuilder
+  ) {}
 
-  constructor() { }
+  categories!: Category[];
+  taskForm = this.formBuilder.group({
+    title: '',
+    category: 1,
+    notes: '',
+    date: new Date(),
+    time: new Date(),
+  });
 
   ngOnInit(): void {
+    this.getCats();
   }
 
+  getCats() {
+    return this.categoryService.getCategories().subscribe((data) => {
+      console.log(data);
+      this.categories = data;
+    });
+  }
+
+  onSubmit(): void {
+    console.log();
+    const { category, date, notes, time, title } = this.taskForm.value;
+    const dateTime = parseISO(`${date} ${time}`);
+    console.log(dateTime);
+    this.taskService
+      .createTask({
+        category: category || 1,
+        dateTime,
+        notes: notes || '',
+        title: title || '',
+      })
+      .subscribe((resp) => {
+        console.log(resp);
+      });
+  }
 }

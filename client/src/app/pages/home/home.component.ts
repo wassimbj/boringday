@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
     if (d) {
       return new Date(d);
     }
-    return new Date()
+    return new Date();
   }
 
   ngOnInit(): void {
