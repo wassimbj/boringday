@@ -1,0 +1,129 @@
+<div class="mt-20">
+  <div class="flex space-x-4 items-center justify-center">
+    <button
+      (click)="handleChangeMonth('prev')"
+      class="rounded-full p-1 hover:bg-slate-900 active:scale-95"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+      >
+        <path
+          stroke="#ccc"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-miterlimit="10"
+          stroke-width="1.5"
+          d="M15 19.92L8.48 13.4c-.77-.77-.77-2.03 0-2.8L15 4.08"
+        ></path>
+      </svg>
+    </button>
+    <div
+      class="text-xl px-5 py-1 text-gray-200 text-center block mx-auto space-x-2"
+    >
+      <span class="inline-block">
+        {{ currentMonth | dfnsFormat: "MMMM" }}
+      </span>
+      <span class="inline-block">
+        {{ currentMonth | dfnsFormat: "yyyy" }}
+      </span>
+    </div>
+    <button
+      (click)="handleChangeMonth('next')"
+      class="rounded-full p-1 hover:bg-slate-900 active:scale-95"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+      >
+        <path
+          stroke="#ccc"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-miterlimit="10"
+          stroke-width="1.5"
+          d="M8.91 19.92l6.52-6.52c.77-.77.77-2.03 0-2.8L8.91 4.08"
+        ></path>
+      </svg>
+    </button>
+  </div>
+  <!-- <span class=""> 10 Apr 2022 </span> -->
+  <div class="mt-5">
+    <div class="flex items-center justify-center space-x-5 text-white">
+      <button
+        (click)="handleChangeWeek('prev')"
+        class="rounded-full p-1 bg-gray-900 hover:bg-opacity-50 active:scale-95"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="25"
+          height="25"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            stroke="#FFFFFF"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-miterlimit="10"
+            stroke-width="1.5"
+            d="M15 19.92L8.48 13.4c-.77-.77-.77-2.03 0-2.8L15 4.08"
+          ></path>
+        </svg>
+      </button>
+      <div
+        id="weekDates"
+        class="py-2 flex items-center space-x-5 overflow-x-auto max-w-2xl"
+      >
+        <button
+          (click)="handleSelectDate(week.day)"
+          *ngFor="let week of weekCells; index as i"
+          class="flex items-center justify-center flex-col w-20 h-20 p-5 relative {{
+            week.isToday ? 'border-2 border-teal-600' : ''
+          }} transition-all rounded-full {{
+            week.isSelectedDate
+              ? 'bg-teal-900 bg-opacity-40 text-teal-300'
+              : 'bg-white active:scale-90 bg-opacity-5 hover:bg-opacity-10 cursor-pointer'
+          }}"
+        >
+          <span class="font-semibold text-lg">{{ week.dayDate }}</span>
+          <span class="text-sm font-light">{{ week.dayName }}</span>
+
+          <!-- showen when there is data in this date -->
+          <span
+            class="absolute {{
+              week.hasTasksTodo ? 'block' : 'hidden'
+            }} bottom-1 w-1 h-1 text-xs bg-red-400 rounded-full"
+          ></span>
+        </button>
+      </div>
+      <button
+        (click)="handleChangeWeek('next')"
+        class="rounded-full p-1 bg-gray-900 hover:bg-opacity-50 active:scale-95"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="25"
+          height="25"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            stroke="#FFFFFF"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-miterlimit="10"
+            stroke-width="1.5"
+            d="M8.91 19.92l6.52-6.52c.77-.77.77-2.03 0-2.8L8.91 4.08"
+          ></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>

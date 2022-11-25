@@ -10,6 +10,7 @@ import { CategoriesComponent } from './pages/categories/categories.component';
 import { CreateCategoryComponent } from './pages/create-category/create-category.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     CategoriesComponent,
     CreateCategoryComponent,
+    CalendarComponent,
   ],
   imports: [
     DateFnsModule.forRoot(),
