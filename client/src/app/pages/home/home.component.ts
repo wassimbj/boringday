@@ -22,8 +22,11 @@ export class HomeComponent implements OnInit {
     this.selectedDate = new Date($event);
     this.getTasks(new Date($event));
   }
-  newDate(d: string | Date): Date {
-    return new Date(d);
+  newDate(d?: string | Date): Date {
+    if (d) {
+      return new Date(d);
+    }
+    return new Date()
   }
 
   ngOnInit(): void {

@@ -1,13 +1,10 @@
 <div class="bg-black pt-5 pb-10 px-10">
-  <!-- calendar -->
-  <!-- TODO: Complelete this to bind the right props -->
   <app-calendar (onSelectDate)="handleSelectDate($event)"></app-calendar>
 </div>
 
 <div class="max-w-2xl p-5 mx-auto mt-5 space-y-10">
   <div class="">
     <div class="flex items-center space-x-2 mb-1">
-      <!-- <span class="font-semibold text-lg block"> Today ✨ </span> -->
       <span class="block font-semibold text-lg">
         {{ selectedDate | dfnsFormat: "d LLL yyyy" }}
       </span>
