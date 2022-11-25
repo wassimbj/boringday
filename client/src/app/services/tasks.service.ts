@@ -17,4 +17,8 @@ export class TasksService {
   createTask(task: CreateTaskBody): Observable<any> {
     return this.http.post(`${environment.serverUrl}/task/create`, task);
   }
+
+  getNumberOfTasksForEachDay(date: Date): Observable<any> {
+    return this.http.get(`${environment.serverUrl}/tasks/week/${date}`);
+  }
 }

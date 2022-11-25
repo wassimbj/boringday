@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import DB from "../db";
-import { addDays, startOfWeek } from "date-fns";
+import { addDays, format, startOfWeek } from "date-fns";
 
 type TaskBody = {
   id: number;
@@ -114,14 +114,17 @@ class TaskController {
     }
   }
 
+  // TODO: compelete this one, to return a full array
   // get number of tasks of given week
   public async getNumberOfTasksOfGivenWeek(req: Request, res: Response) {
     try {
       const { date } = req.params; // start of the week 1-31
-      const weekDate = startOfWeek(new Date(date), { weekStartsOn: 1 });
+      const startOfWeekDate = startOfWeek(new Date(date), { weekStartsOn: 1 });
       const tasks = await DB.task.groupBy({
         by: ["date"],
-        where: { date: { gte: weekDate, lte: addDays(weekDate, 6) } },
+        where: {
+          date: { gte: startOfWeekDate, lte: addDays(startOfWeekDate, 6) },
+        },
         _count: {
           id: true,
         },

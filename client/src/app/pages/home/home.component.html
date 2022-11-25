@@ -102,9 +102,11 @@
 
             <!-- showen when there is data in this date -->
             <span
-              class="absolute bottom-1 {{
+              class="absolute {{
+                week.hasTasksTodo ? 'block' : 'hidden'
+              }} bottom-1 {{
                 week.isToday ? 'ml-3' : ''
-              }} w-1 h-1 bg-red-400 rounded-full"
+              }} w-1 h-1 text-xs bg-red-400 rounded-full"
             ></span>
           </button>
         </div>
@@ -159,7 +161,10 @@
       class="w-full space-y-3"
       *ngIf="!tasks.isLoading && tasks.items.length > 0"
     >
-      <div class="flex items-center w-full" *ngFor="let task of tasks.items">
+      <div
+        class="flex group items-center w-full"
+        *ngFor="let task of tasks.items"
+      >
         <span
           class="flex px-2 py-1 rounded-full font-semibold text-sm bg-[#e6dfdd]"
           >{{ newDate(task.time) | dfnsFormat: "hh:mm bbbb" }}</span
@@ -170,7 +175,7 @@
           <div class="flex w-full font-semibold items-center">
             <span
               class="p-1 bg-gray-50 mr-1 inline-block rounded-md text-xl"
-              title="Category: Work"
+              title="{{ task.category.name }}"
             >
               {{ task.category.icon }}
             </span>
@@ -178,34 +183,44 @@
               {{ task.title }}
             </p>
           </div>
-          <div>
-            <div class="relative">
-              <details class="appearance-none relative">
-                <summary
-                  class=""
-                >
-                  New
-                </summary>
-                <div
-                  class="absolute w-full top-12 bg-white rounded-md shadow-md p-3 overflow-hidden"
-                >
-                  <a
-                    routerLink="/p/create"
-                    class="rounded-md p-2 block hover:bg-gray-100 transition-colors"
-                  >
-                    Plan
-                  </a>
-                  <a
-                    routerLink="/c/create"
-                    class="rounded-md p-2 block hover:bg-gray-100 transition-colors"
-                  >
-                    Category
-                  </a>
-                </div>
-              </details>
-            </div>
-          </div>
         </div>
+        <details
+          class="appearance-none relative transition-opacity group-hover:opacity-100 opacity-0"
+        >
+          <summary
+            class="list-none rounded-full p-2 cursor-pointer active:scale-95 transition-transform ml-2 bg-gray-200"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path
+                d="M5 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2ZM19 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2ZM12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2Z"
+                stroke="#000000"
+                stroke-width="1.5"
+              ></path>
+            </svg>
+          </summary>
+          <div
+            class="absolute w-44 z-30 top-12 bg-white rounded-md shadow-md p-3 overflow-hidden"
+          >
+            <a
+              routerLink="/p/create"
+              class="rounded-md p-2 block hover:bg-gray-100 transition-colors"
+            >
+              Edit
+            </a>
+            <a
+              routerLink="/c/create"
+              class="text-red-600 rounded-md p-2 block hover:bg-gray-100 transition-colors"
+            >
+              Delete
+            </a>
+          </div>
+        </details>
       </div>
     </div>
   </div>
