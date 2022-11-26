@@ -25,11 +25,8 @@ model Task {
 
 // https://javascript.plainenglish.io/add-emoji-to-your-angular-application-c753e0d5cf84
 model Category {
-  id        Int       @id @default(autoincrement())
-  icon      String
-  name      String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  deletedAt DateTime?
-  tasks    Task[]
+  id    Int    @id @default(autoincrement())
+  icon  String
+  name  String
+  tasks Task[]
 }

@@ -19,6 +19,7 @@ import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 import { ModalModule } from 'angular-custom-modal';
 import { CategoryCardComponent } from './components/category-card/category-card.component';
 import { CategoryTasksComponent } from './pages/category-tasks/category-tasks.component';
+import { EditCategoryComponent } from './pages/edit-category/edit-category.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { CategoryTasksComponent } from './pages/category-tasks/category-tasks.co
     EditTaskComponent,
     CategoryCardComponent,
     CategoryTasksComponent,
+    EditCategoryComponent,
   ],
   imports: [
     DateFnsModule.forRoot(),

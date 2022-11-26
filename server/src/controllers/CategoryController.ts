@@ -91,6 +91,26 @@ class CategoryController {
       return res.status(500).json("ERROR!");
     }
   }
+
+  // get category by id
+  public async getCategoryById(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+
+      const category = await DB.category.findUnique({
+        where: { id: Number(id) },
+        select: {
+          icon: true,
+          name: true,
+        },
+      });
+
+      return res.status(200).json(category);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json("ERROR!");
+    }
+  }
 }
 
 export default new CategoryController();

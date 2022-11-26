@@ -1,17 +1,19 @@
 <div class="relative group">
   <details
-    class="appearance-none relative transition-opacity group-hover:opacity-100 opacity-0"
+    class="relative transition-opacity group-hover:opacity-100 opacity-0"
   >
     <summary
-      class="bg-white list-none group-hover:opacity-100 opacity-0 active:scale-95 hover:bg-gray-50 transition-all shadow border cursor-pointer p-2 text-sm rounded-full absolute -right-3 -top-3"
+      class="bg-white inline-block list-none group-hover:opacity-100 opacity-0 active:scale-95 hover:bg-gray-50 transition-all absolute -right-3 -top-3 shadow border cursor-pointer p-2 text-sm rounded-full"
     >
       •••
     </summary>
     <div
-      class="absolute w-40 z-30 bg-white rounded-md shadow-md p-3 overflow-hidden"
+      class="absolute top-7 right-0 w-40 z-30 bg-white rounded-md shadow-md p-3 overflow-hidden"
     >
-      <!-- routerLink="/task/edit/{{ task.id }}" -->
-      <a class="rounded-md p-2 block hover:bg-gray-100 transition-colors">
+      <a
+        routerLink="/category/edit/{{ category.id! }}"
+        class="rounded-md p-2 block hover:bg-gray-100 transition-colors"
+      >
         Edit
       </a>
       <button

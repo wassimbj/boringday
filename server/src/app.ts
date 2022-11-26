@@ -28,6 +28,7 @@ app.get("/tasks/c/:category", TaskController.getTasksByCategory);
 app.post("/category/create", CategoryController.create);
 app.post("/category/update", CategoryController.update);
 app.get("/category/delete/:id", CategoryController.delete);
+app.get("/category/:id", CategoryController.getCategoryById);
 app.get("/categories", CategoryController.getCategories);
 
 const PORT = process.env.PORT || 5000;
