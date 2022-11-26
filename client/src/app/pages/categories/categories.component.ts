@@ -14,8 +14,15 @@ export class CategoriesComponent implements OnInit {
     this.getCategories();
   }
 
-  categories!: { items: Category[], isLoading: boolean };
+  categories: { items: Category[]; isLoading: boolean } = {
+    isLoading: true,
+    items: [],
+  };
 
+  refreshCategories() {
+    this.getCategories();
+  }
+  
   getCategories() {
     this.categoryService.getCategories().subscribe((data) => {
       console.log(data);

@@ -8,3 +8,7 @@ body {
   /* background: #fff9f6; */
   font-family: "Nunito", sans-serif;
 }
+
+.modal-header .close {
+  @apply h-10 w-10 bg-gray-50 hover:bg-gray-100 transition-colors active:scale-95 text-xl rounded-full flex items-center justify-center mb-2;
+}

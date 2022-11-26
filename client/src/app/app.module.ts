@@ -16,6 +16,9 @@ import { TaskCardComponent } from './components/task-card/task-card.component';
 import { EditTaskComponent } from './pages/edit-task/edit-task.component';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
+import { ModalModule } from 'angular-custom-modal';
+import { CategoryCardComponent } from './components/category-card/category-card.component';
+import { CategoryTasksComponent } from './pages/category-tasks/category-tasks.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,8 @@ import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
     CalendarComponent,
     TaskCardComponent,
     EditTaskComponent,
+    CategoryCardComponent,
+    CategoryTasksComponent,
   ],
   imports: [
     DateFnsModule.forRoot(),
@@ -40,6 +45,7 @@ import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
     }),
     PickerModule,
     EmojiModule,
+    ModalModule,
   ],
   providers: [FormBuilder],
   bootstrap: [AppComponent],

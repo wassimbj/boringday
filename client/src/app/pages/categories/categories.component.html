@@ -2,33 +2,24 @@
   <div class="flex justify-between mb-10">
     <span class="text-xl block"> Organize your tasks with categories </span>
     <a
-      href="/category/create"
+      routerLink="/category/create"
       class="decoration-blue-600 inline-block p-1 font-semibold hover:text-blue-700 underline text-blue-500"
     >
       Create Category
     </a>
   </div>
-  <div *ngIf="categories.isLoading">Loading...</div>
   <div
-    class="grid grid-cols-3 gap-5"
+    *ngIf="categories.isLoading"
+    class="text-center p-10 text-lg font-semibold"
+  >
+    Loading...
+  </div>
+  <div
+    class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5"
     *ngIf="!categories.isLoading && categories.items.length > 0"
   >
-    <a
-      *ngFor="let category of categories.items"
-      class="p-5 border rounded-md hover:border-gray-400 hover:bg-gray-50 transition-all active:bg-gray-100 cursor-pointer"
-    >
-      <div class="bg-gray-100 rounded-full text-center w-16 h-16 mx-auto">
-        <ngx-emoji
-          class="flex items-center justify-center h-full w-full"
-          emoji="{{ category.icon }}"
-          [size]="35"
-          set="twitter"
-        ></ngx-emoji>
-      </div>
-      <span class="block text-center mt-2 font-semibold">{{
-        category.name
-      }}</span>
-      <span class="block text-center mt-1">{{ category._count?.tasks }}</span>
-    </a>
+    <div *ngFor="let category of categories.items">
+      <app-category-card [category]="category" (onDelete)="refreshCategories()"></app-category-card>
+    </div>
   </div>
 </div>

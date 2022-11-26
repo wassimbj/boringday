@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CategoriesComponent } from './pages/categories/categories.component';
+import { CategoryTasksComponent } from './pages/category-tasks/category-tasks.component';
 import { CreateCategoryComponent } from './pages/create-category/create-category.component';
 import { CreateTaskComponent } from './pages/create-task/create-task.component';
 import { EditTaskComponent } from './pages/edit-task/edit-task.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'task/create', component: CreateTaskComponent },
   { path: 'task/edit/:id', component: EditTaskComponent },
   { path: 'category/create', component: CreateCategoryComponent },
+  { path: 'category/:id', component: CategoryTasksComponent },
 ];
 
 @NgModule({

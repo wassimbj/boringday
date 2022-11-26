@@ -1,0 +1,43 @@
+<div class="relative group">
+  <details
+    class="appearance-none relative transition-opacity group-hover:opacity-100 opacity-0"
+  >
+    <summary
+      class="bg-white list-none group-hover:opacity-100 opacity-0 active:scale-95 hover:bg-gray-50 transition-all shadow border cursor-pointer p-2 text-sm rounded-full absolute -right-3 -top-3"
+    >
+      •••
+    </summary>
+    <div
+      class="absolute w-40 z-30 bg-white rounded-md shadow-md p-3 overflow-hidden"
+    >
+      <!-- routerLink="/task/edit/{{ task.id }}" -->
+      <a class="rounded-md p-2 block hover:bg-gray-100 transition-colors">
+        Edit
+      </a>
+      <button
+        (click)="onDeleteCategory(category.id!)"
+        class="text-red-600 w-full text-left rounded-md p-2 block hover:bg-gray-100 transition-colors"
+      >
+        Delete
+      </button>
+    </div>
+  </details>
+
+  <a
+    routerLink="/category/{{ category.id }}"
+    class="p-5 border block rounded-md hover:border-gray-400 hover:bg-gray-50 transition-all active:bg-gray-100 cursor-pointer"
+  >
+    <div class="bg-gray-100 rounded-full text-center w-16 h-16 mx-auto">
+      <ngx-emoji
+        class="flex items-center justify-center h-full w-full"
+        emoji="{{ category.icon }}"
+        [size]="35"
+        set="twitter"
+      ></ngx-emoji>
+    </div>
+    <span class="block text-center mt-2 font-semibold">{{
+      category.name
+    }}</span>
+    <span class="block text-center mt-1">{{ category._count?.tasks }}</span>
+  </a>
+</div>
