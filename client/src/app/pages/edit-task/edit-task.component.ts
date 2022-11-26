@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { parseISO } from 'date-fns';
+import { format, parse, parseISO } from 'date-fns';
 import { CategoryService } from 'src/app/services/category.service';
 import { TasksService } from 'src/app/services/tasks.service';
-import { Category } from 'src/app/types';
+import { Category, Task } from 'src/app/types';
 
 @Component({
   selector: 'app-edit-task',
@@ -23,16 +23,43 @@ export class EditTaskComponent implements OnInit {
   ) {}
 
   categories!: Category[];
+  taskId!: number;
   taskForm = this.formBuilder.group({
     title: '',
-    category: 1,
+    category: '1',
+    id: 0,
     notes: '',
-    date: null,
-    time: null,
+    date: new Date(),
+    time: new Date(),
   });
 
   ngOnInit(): void {
     this.getCats();
+    this.taskId = Number.parseInt(
+      this.route.snapshot.paramMap.get('id') || '0'
+    );
+    this.getTaskToEdit(this.taskId);
+  }
+
+  newDate(d?: string | Date): Date {
+    if (d) {
+      return new Date(d);
+    }
+    return new Date();
+  }
+
+  getTaskToEdit(id: number) {
+    this.taskService.getTaskById(id).subscribe((task: Task) => {
+      console.log(task);
+      this.taskForm.setValue({
+        category: String(task.categoryId || 1),
+        notes: task.notes,
+        id: task.id,
+        title: task.title,
+        time: task.time,
+        date: task.date,
+      });
+    });
   }
 
   isSubmitButtonDisabled(): boolean {
@@ -46,23 +73,23 @@ export class EditTaskComponent implements OnInit {
 
   getCats() {
     return this.categoryService.getCategories().subscribe((data) => {
-      console.log(data);
       this.categories = data;
     });
   }
 
   onSubmit(): void {
-    console.log();
     const { category, date, notes, time, title } = this.taskForm.value;
     if (!title || !date || !time) {
       return;
     }
+
     const dateTime = parseISO(`${date} ${time}`);
     console.log(dateTime);
     this.taskService
-      .createTask({
-        category: category || 1,
+      .updateTask({
+        category: Number.parseInt(category || '1'),
         dateTime,
+        id: this.taskId,
         notes: notes || '',
         title: title || '',
       })

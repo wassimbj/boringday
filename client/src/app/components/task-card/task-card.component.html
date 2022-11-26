@@ -9,9 +9,9 @@
     <div class="flex w-full font-semibold items-center">
       <span
         class="p-1 bg-gray-50 mr-1 inline-block rounded-md text-xl"
-        title="{{ task.category.name }}"
+        title="{{ task.category?.name }}"
       >
-        {{ task.category.icon }}
+        {{ task.category?.icon }}
       </span>
       <p class="truncate">
         {{ task.title }}

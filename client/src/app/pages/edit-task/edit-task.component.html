@@ -13,7 +13,10 @@
       </div>
       <div>
         <label class="font-semibold text-sm"> Category </label>
-        <select type="text" class="block p-2 w-full border rounded-md">
+        <select
+          formControlName="category"
+          class="block p-2 w-full border rounded-md"
+        >
           <option *ngFor="let category of categories" value="{{ category.id }}">
             {{ category.icon }} {{ category.name }}
           </option>
@@ -27,7 +30,6 @@
               type="date"
               formControlName="date"
               class="block p-2 w-full border rounded-md"
-              placeholder="Make the angular project"
             />
           </div>
           <div class="w-full">
@@ -36,7 +38,6 @@
               type="time"
               formControlName="time"
               class="block p-2 w-full border rounded-md"
-              placeholder="Make the angular project"
             />
           </div>
         </div>

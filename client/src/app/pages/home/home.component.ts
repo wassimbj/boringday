@@ -33,12 +33,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.selectedDate = new Date($event);
     this.getTasks(new Date($event));
   }
-  newDate(d?: string | Date): Date {
-    if (d) {
-      return new Date(d);
-    }
-    return new Date();
-  }
 
   ngOnInit(): void {
     this.getTasks(this.selectedDate);

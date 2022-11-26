@@ -98,6 +98,27 @@ class TaskController {
     }
   }
 
+  // get task by id
+  public async getTaskById(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+
+      const task = await DB.task.findFirst({
+        where: { id: Number.parseInt(id) },
+        include: {
+          category: {
+            select: { id: true, icon: true, name: true },
+          },
+        },
+      });
+
+      return res.status(200).json(task);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json("ERROR!");
+    }
+  }
+
   // get tasks by category
   public async getTasksByCategory(req: Request, res: Response) {
     try {
@@ -114,7 +135,6 @@ class TaskController {
     }
   }
 
-  // TODO: compelete this one, to return a full array
   // get number of tasks of given week
   public async getNumberOfTasksOfGivenWeek(req: Request, res: Response) {
     try {
@@ -123,7 +143,7 @@ class TaskController {
       const tasks = await DB.task.groupBy({
         by: ["date"],
         where: {
-          date: { gte: startOfWeekDate, lte: addDays(startOfWeekDate, 6) },
+          date: { gte: startOfWeekDate, lte: addDays(startOfWeekDate, 7) },
         },
         _count: {
           id: true,

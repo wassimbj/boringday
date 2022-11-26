@@ -5,14 +5,15 @@ export type Task = {
   date: Date;
   time: Date;
   categoryId: number;
-  category: Category;
-  isDone: boolean;
-  createdAt: Date;
+  createdAt?: Date;
+  category?: Category;
+  isDone?: boolean;
 };
 
 export type CreateTaskBody = {
   title: string;
   notes: string;
+  id?: number;
   category: number;
   dateTime: Date;
 };
