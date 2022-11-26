@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <div
+    <!-- <div
       class="w-full space-y-3"
       *ngIf="!tasks.isLoading && tasks.items.length > 0"
     >
@@ -86,6 +86,14 @@
             </a>
           </div>
         </details>
+      </div>
+    </div> -->
+    <div
+      class="w-full space-y-3"
+      *ngIf="!tasks.isLoading && tasks.items.length > 0"
+    >
+      <div *ngFor="let task of tasks.items">
+        <app-task-card [task]="task" (onDelete)="refreshTasks()"></app-task-card>
       </div>
     </div>
   </div>

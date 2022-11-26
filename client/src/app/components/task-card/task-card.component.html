@@ -1,0 +1,60 @@
+<div class="flex group items-center w-full">
+  <span
+    class="flex px-2 py-1 rounded-full font-semibold text-sm bg-[#e6dfdd]"
+    >{{ newDate(task.time) | dfnsFormat: "hh:mm bbbb" }}</span
+  >
+  <div
+    class="flex w-full p-3 rounded-md shadow-sm hover:shadow-md transition-shadow cursor-pointer bg-white max-w-md ml-2 font-semibold items-center justify-between overflow-hidden"
+  >
+    <div class="flex w-full font-semibold items-center">
+      <span
+        class="p-1 bg-gray-50 mr-1 inline-block rounded-md text-xl"
+        title="{{ task.category.name }}"
+      >
+        {{ task.category.icon }}
+      </span>
+      <p class="truncate">
+        {{ task.title }}
+      </p>
+    </div>
+  </div>
+ 
+  <!-- the actions dropdown -->
+  <details
+    class="appearance-none relative transition-opacity group-hover:opacity-100 opacity-0"
+  >
+    <summary
+      class="list-none rounded-full p-2 cursor-pointer active:scale-95 transition-transform ml-2 bg-gray-200"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+      >
+        <path
+          d="M5 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2ZM19 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2ZM12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2Z"
+          stroke="#000000"
+          stroke-width="1.5"
+        ></path>
+      </svg>
+    </summary>
+    <div
+      class="absolute w-40 z-30 top-12 bg-white rounded-md shadow-md p-3 overflow-hidden"
+    >
+      <a
+        routerLink="/p/create"
+        class="rounded-md p-2 block hover:bg-gray-100 transition-colors"
+      >
+        Edit
+      </a>
+      <button
+        (click)="deleteTask(task.id)"
+        class="text-red-600 w-full text-left rounded-md p-2 block hover:bg-gray-100 transition-colors"
+      >
+        Delete
+      </button>
+    </div>
+  </details>
+</div>

@@ -22,8 +22,8 @@ export class CreateTaskComponent implements OnInit {
     title: '',
     category: 1,
     notes: '',
-    date: new Date(),
-    time: new Date(),
+    date: null,
+    time: null,
   });
 
   ngOnInit(): void {
@@ -40,6 +40,9 @@ export class CreateTaskComponent implements OnInit {
   onSubmit(): void {
     console.log();
     const { category, date, notes, time, title } = this.taskForm.value;
+    if (!title || !date || !time) {
+      return;
+    }
     const dateTime = parseISO(`${date} ${time}`);
     console.log(dateTime);
     this.taskService

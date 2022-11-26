@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { format } from 'date-fns';
 import { TasksService } from 'src/app/services/tasks.service';
 import { Task } from 'src/app/types';
@@ -30,6 +30,12 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getTasks(this.selectedDate);
+  }
+
+  refreshTasks() {
+    console.log('Refreshing...');
+    this.tasks.isLoading = true;
     this.getTasks(this.selectedDate);
   }
 
