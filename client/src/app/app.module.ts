@@ -12,6 +12,7 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { TaskCardComponent } from './components/task-card/task-card.component';
+import { EditTaskComponent } from './pages/edit-task/edit-task.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { TaskCardComponent } from './components/task-card/task-card.component';
     CreateCategoryComponent,
     CalendarComponent,
     TaskCardComponent,
+    EditTaskComponent,
   ],
   imports: [
     DateFnsModule.forRoot(),

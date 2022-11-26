@@ -1,6 +1,6 @@
 <div class="p-10">
   <div class="rounded-md max-w-xl p-5 mx-auto">
-    <h1 class="text-2xl text-center font-semibold mb-5">Create new task</h1>
+    <h1 class="text-2xl text-center font-semibold mb-5">Edit task</h1>
     <form class="space-y-5" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
       <div>
         <label class="font-semibold text-sm"> Title </label>
@@ -13,14 +13,10 @@
       </div>
       <div>
         <label class="font-semibold text-sm"> Category </label>
-        <select
-          formControlName="category"
-          class="block p-2 w-full border rounded-md"
-        >
+        <select type="text" class="block p-2 w-full border rounded-md">
           <option *ngFor="let category of categories" value="{{ category.id }}">
             {{ category.icon }} {{ category.name }}
           </option>
-          <!-- <option>🍕 Home</option> -->
         </select>
       </div>
       <div>
@@ -58,7 +54,7 @@
         type="submit"
         class="hover:bg-green-400 inline-block cursor-pointer bg-green-500 delay-75 duration-100 text-white text-sm font-semibold w-full rounded-full py-3 px-5 active:translate-y-0.5 border-b-4 active:border-b-0 border-b-green-600"
       >
-        Create
+        Save changes
       </button>
     </form>
   </div>

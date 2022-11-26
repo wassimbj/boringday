@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   format,
   subMonths,
@@ -54,6 +54,10 @@ export class CalendarComponent implements OnInit {
     }
     this.weekCells = days;
     days = [];
+  }
+
+  refreshCalendar() {
+    this.getWeekDatesTasks(this.selectedDate);
   }
 
   isTasksEmpty(arr: Array<Task>) {

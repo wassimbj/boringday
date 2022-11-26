@@ -1,18 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from 'src/app/services/category.service';
-import { Category } from 'src/app/types';
 import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { parseISO } from 'date-fns';
+import { CategoryService } from 'src/app/services/category.service';
 import { TasksService } from 'src/app/services/tasks.service';
-import { parse, parseISO } from 'date-fns';
+import { Category } from 'src/app/types';
 
 @Component({
-  selector: 'app-create-task',
-  templateUrl: './create-task.component.html',
-  styleUrls: ['./create-task.component.css'],
+  selector: 'app-edit-task',
+  templateUrl: './edit-task.component.html',
+  styleUrls: ['./edit-task.component.css'],
 })
-export class CreateTaskComponent implements OnInit {
+export class EditTaskComponent implements OnInit {
+  // ngOnInit(): void {
+  //   console.log(this.route.snapshot.paramMap.get('id'));
+  // }
   constructor(
     private categoryService: CategoryService,
+    private route: ActivatedRoute,
     private taskService: TasksService,
     private formBuilder: FormBuilder
   ) {}
@@ -38,11 +43,9 @@ export class CreateTaskComponent implements OnInit {
   }
 
   onSubmit(): void {
+    console.log();
     const { category, date, notes, time, title } = this.taskForm.value;
-
-    console.log(this.taskForm.value);
     if (!title || !date || !time) {
-      console.log('Empty fields');
       return;
     }
     const dateTime = parseISO(`${date} ${time}`);
@@ -55,9 +58,7 @@ export class CreateTaskComponent implements OnInit {
         title: title || '',
       })
       .subscribe((resp) => {
-        // console.log(resp);
-
-        this.taskForm.reset();
+        console.log(resp);
       });
   }
 }
