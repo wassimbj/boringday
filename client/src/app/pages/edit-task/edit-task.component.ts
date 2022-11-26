@@ -35,6 +35,15 @@ export class EditTaskComponent implements OnInit {
     this.getCats();
   }
 
+  isSubmitButtonDisabled(): boolean {
+    return (
+      !this.taskForm.value.title ||
+      !this.taskForm.value.date ||
+      !this.taskForm.value.time ||
+      !this.taskForm.value.category
+    );
+  }
+
   getCats() {
     return this.categoryService.getCategories().subscribe((data) => {
       console.log(data);

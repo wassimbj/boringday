@@ -4,6 +4,8 @@ import { Category } from 'src/app/types';
 import { FormBuilder } from '@angular/forms';
 import { TasksService } from 'src/app/services/tasks.service';
 import { parse, parseISO } from 'date-fns';
+import { HotToastService } from '@ngneat/hot-toast';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-create-task',
@@ -14,6 +16,7 @@ export class CreateTaskComponent implements OnInit {
   constructor(
     private categoryService: CategoryService,
     private taskService: TasksService,
+    private toast: HotToastService,
     private formBuilder: FormBuilder
   ) {}
 
@@ -63,7 +66,15 @@ export class CreateTaskComponent implements OnInit {
         notes: notes || '',
         title: title || '',
       })
-      .subscribe((resp) => {
+      .pipe(
+        this.toast.observe({
+          loading: 'Creating task...',
+          error: 'Oops, something went wrong',
+          success: 'Task has been successfully created 🎉',
+        }),
+        catchError((error) => of(error))
+      )
+      .subscribe(() => {
         this.taskForm.reset();
       });
   }

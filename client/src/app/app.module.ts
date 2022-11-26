@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DateFnsModule } from 'ngx-date-fns';
+import { HotToastModule } from '@ngneat/hot-toast';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,7 +32,8 @@ import { EditTaskComponent } from './pages/edit-task/edit-task.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HotToastModule.forRoot(),
   ],
   providers: [FormBuilder],
   bootstrap: [AppComponent],
