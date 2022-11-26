@@ -14,6 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { TaskCardComponent } from './components/task-card/task-card.component';
 import { EditTaskComponent } from './pages/edit-task/edit-task.component';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { EditTaskComponent } from './pages/edit-task/edit-task.component';
     HotToastModule.forRoot({
       position: 'top-left',
     }),
+    PickerModule,
+    EmojiModule,
   ],
   providers: [FormBuilder],
   bootstrap: [AppComponent],
