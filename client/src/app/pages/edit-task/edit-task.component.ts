@@ -29,9 +29,10 @@ export class EditTaskComponent implements OnInit {
     category: '1',
     id: 0,
     notes: '',
-    date: new Date(),
-    time: new Date(),
+    date: '',
+    time: '',
   });
+  taskToEdit!: Task;
 
   ngOnInit(): void {
     this.getCats();
@@ -51,13 +52,14 @@ export class EditTaskComponent implements OnInit {
   getTaskToEdit(id: number) {
     this.taskService.getTaskById(id).subscribe((task: Task) => {
       console.log(task);
+      this.taskToEdit = task;
       this.taskForm.setValue({
         category: String(task.categoryId || 1),
         notes: task.notes,
         id: task.id,
         title: task.title,
-        time: task.time,
-        date: task.date,
+        time: format(new Date(task.time), 'HH:mm'),
+        date: format(new Date(task.date), 'yyyy-MM-dd'),
       });
     });
   }

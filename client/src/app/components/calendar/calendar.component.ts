@@ -100,7 +100,7 @@ export class CalendarComponent implements OnInit {
     this.tasksService
       .getNumberOfTasksForEachDay(selectedDate)
       .subscribe((data) => {
-        console.log(data)
+        // console.log(data)
         this.tasksOfEachDay = data;
         this.renderWeekCells();
       });
