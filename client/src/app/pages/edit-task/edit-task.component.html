@@ -18,7 +18,7 @@
           class="block p-2 w-full border rounded-md"
         >
           <option *ngFor="let category of categories" value="{{ category.id }}">
-            {{ category.icon }} {{ category.name }}
+            {{ getEmojiFromName(category.icon) }} {{ category.name }}
           </option>
         </select>
       </div>

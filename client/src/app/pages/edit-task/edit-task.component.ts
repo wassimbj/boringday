@@ -1,3 +1,4 @@
+import { EmojiService } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -22,7 +23,8 @@ export class EditTaskComponent implements OnInit {
     private route: ActivatedRoute,
     private toast: HotToastService,
     private taskService: TasksService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private emoji: EmojiService
   ) {}
 
   categories!: Category[];
@@ -78,6 +80,9 @@ export class EditTaskComponent implements OnInit {
     return this.categoryService.getCategories().subscribe((data) => {
       this.categories = data;
     });
+  }
+  getEmojiFromName(name: string) {
+    return this.emoji.getData(name, undefined, 'twitter')?.native;
   }
 
   onSubmit(): void {
