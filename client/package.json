@@ -21,6 +21,7 @@
     "@ctrl/ngx-emoji-mart": "^7.1.0",
     "@ngneat/hot-toast": "^4.1.0",
     "@ngneat/overview": "^3.0.0",
+    "angular-custom-modal": "^1.2.0",
     "date-fns": "^2.29.3",
     "ngx-date-fns": "^10.0.1",
     "rxjs": "~7.5.0",

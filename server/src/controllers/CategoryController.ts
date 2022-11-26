@@ -34,7 +34,7 @@ class CategoryController {
           name: true,
           _count: {
             select: {
-              Tasks: true,
+              tasks: true,
             },
           },
         },
