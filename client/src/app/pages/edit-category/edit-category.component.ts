@@ -40,7 +40,7 @@ export class EditCategoryComponent implements OnInit {
   }
 
   isSubmitButtonDisabled(): boolean {
-    return !this.categoryForm.value.name || !this.categoryForm.dirty;
+    return !this.categoryForm.value.name;
   }
 
   getCategoryToEdit(id: number) {
@@ -55,20 +55,19 @@ export class EditCategoryComponent implements OnInit {
 
   onSubmit() {
     this.categoryService
-      .createCategory({
+      .updateCategory({
+        id: this.categoryId,
         icon: this.categoryForm.value.icon || '',
         name: this.categoryForm.value.name || '',
       })
       .pipe(
         this.toast.observe({
-          loading: 'Creating category...',
+          loading: 'Updating category...',
           error: 'Oops, something went wrong',
-          success: 'Category added successfully 🎉',
+          success: 'Category updated successfully 🔁',
         }),
         catchError((error) => of(error))
       )
-      .subscribe(() => {
-        this.categoryForm.reset({ icon: 'nerd_face' });
-      });
+      .subscribe(console.log);
   }
 }
