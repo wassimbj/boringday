@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { HotToastService } from '@ngneat/hot-toast';
 import { format, parse, parseISO } from 'date-fns';
+import { catchError, of } from 'rxjs';
 import { CategoryService } from 'src/app/services/category.service';
 import { TasksService } from 'src/app/services/tasks.service';
 import { Category, Task } from 'src/app/types';
@@ -18,6 +20,7 @@ export class EditTaskComponent implements OnInit {
   constructor(
     private categoryService: CategoryService,
     private route: ActivatedRoute,
+    private toast: HotToastService,
     private taskService: TasksService,
     private formBuilder: FormBuilder
   ) {}
@@ -32,7 +35,6 @@ export class EditTaskComponent implements OnInit {
     date: '',
     time: '',
   });
-  taskToEdit!: Task;
 
   ngOnInit(): void {
     this.getCats();
@@ -51,8 +53,6 @@ export class EditTaskComponent implements OnInit {
 
   getTaskToEdit(id: number) {
     this.taskService.getTaskById(id).subscribe((task: Task) => {
-      console.log(task);
-      this.taskToEdit = task;
       this.taskForm.setValue({
         category: String(task.categoryId || 1),
         notes: task.notes,
@@ -69,7 +69,8 @@ export class EditTaskComponent implements OnInit {
       !this.taskForm.value.title ||
       !this.taskForm.value.date ||
       !this.taskForm.value.time ||
-      !this.taskForm.value.category
+      !this.taskForm.value.category ||
+      !this.taskForm.dirty
     );
   }
 
@@ -95,6 +96,14 @@ export class EditTaskComponent implements OnInit {
         notes: notes || '',
         title: title || '',
       })
+      .pipe(
+        this.toast.observe({
+          loading: 'Creating task...',
+          error: 'Oops, something went wrong',
+          success: 'Task has been updated successfully 😁',
+        }),
+        catchError((error) => of(error))
+      )
       .subscribe((resp) => {
         console.log(resp);
       });

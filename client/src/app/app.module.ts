@@ -33,7 +33,9 @@ import { EditTaskComponent } from './pages/edit-task/edit-task.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    HotToastModule.forRoot(),
+    HotToastModule.forRoot({
+      position: 'top-left',
+    }),
   ],
   providers: [FormBuilder],
   bootstrap: [AppComponent],
