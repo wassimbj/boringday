@@ -20,7 +20,7 @@ export class CreateTaskComponent implements OnInit {
   categories!: Category[];
   taskForm = this.formBuilder.group({
     title: '',
-    category: 1,
+    category: '1',
     notes: '',
     date: null,
     time: null,
@@ -28,6 +28,15 @@ export class CreateTaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCats();
+  }
+
+  isSubmitButtonDisabled(): boolean {
+    return (
+      !this.taskForm.value.title ||
+      !this.taskForm.value.date ||
+      !this.taskForm.value.time ||
+      !this.taskForm.value.category
+    );
   }
 
   getCats() {
@@ -39,7 +48,7 @@ export class CreateTaskComponent implements OnInit {
 
   onSubmit(): void {
     const { category, date, notes, time, title } = this.taskForm.value;
-
+    // this.taskForm.valid
     console.log(this.taskForm.value);
     if (!title || !date || !time) {
       console.log('Empty fields');
@@ -49,14 +58,12 @@ export class CreateTaskComponent implements OnInit {
     console.log(dateTime);
     this.taskService
       .createTask({
-        category: category || 1,
+        category: Number.parseInt(category || '1'),
         dateTime,
         notes: notes || '',
         title: title || '',
       })
       .subscribe((resp) => {
-        // console.log(resp);
-
         this.taskForm.reset();
       });
   }

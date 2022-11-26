@@ -30,6 +30,7 @@ class CategoryController {
       const categories = await DB.category.findMany({
         select: {
           icon: true,
+          id: true,
           name: true,
           _count: {
             select: {
