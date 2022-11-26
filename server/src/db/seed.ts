@@ -7,7 +7,7 @@ async function main() {
     create: {
       id: 1,
       name: "Unsorted",
-      icon: "✨"
+      icon: "sparkles"
     },
   });
   console.log({ unsortedCategory });

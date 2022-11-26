@@ -1,18 +1,20 @@
 <div class="p-10">
   <div class="rounded-md max-w-xl p-5 mx-auto">
-    <h1 class="text-2xl text-center font-semibold mb-5">Create new task</h1>
+    <h1 class="text-2xl text-center font-semibold mb-5">Create new category</h1>
     <form class="space-y-5" [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
       <div class="flex items-center space-x-5">
         <div>
           <label class="font-semibold text-sm"> Icon </label>
           <details class="relative">
             <summary
+              title="select icon"
               class="bg-gray-100 hover:bg-gray-200 cursor-pointer transition-all active:scale-95 p-3 list-none rounded-full"
             >
               <ngx-emoji
                 class="flex items-center justify-center"
                 emoji="{{ categoryForm.value.icon }}"
                 [size]="35"
+                set="twitter"
               ></ngx-emoji>
             </summary>
             <div class="absolute">
@@ -20,6 +22,7 @@
                 formControlName="icon"
                 (emojiSelect)="selectEmoji($event)"
                 emoji="{{ categoryForm.value.icon }}"
+                set="twitter"
               ></emoji-mart>
             </div>
           </details>
