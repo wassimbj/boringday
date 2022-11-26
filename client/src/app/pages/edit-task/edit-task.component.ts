@@ -98,7 +98,7 @@ export class EditTaskComponent implements OnInit {
       })
       .pipe(
         this.toast.observe({
-          loading: 'Creating task...',
+          loading: 'Updating task...',
           error: 'Oops, something went wrong',
           success: 'Task has been updated successfully 😁',
         }),

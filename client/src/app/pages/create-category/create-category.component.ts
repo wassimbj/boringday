@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { HotToastService } from '@ngneat/hot-toast';
 import { CategoryService } from 'src/app/services/category.service';
+import { EmojiService } from '@ctrl/ngx-emoji-mart/ngx-emoji';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-create-category',
@@ -28,17 +30,27 @@ export class CreateCategoryComponent implements OnInit {
       name: this.categoryForm.value.name!,
       icon: data.emoji.shortName,
     });
-    // this.categoryForm.value.icon = data!.shortName;
   }
 
+  isSubmitButtonDisabled(): boolean {
+    return !this.categoryForm.value.name;
+  }
   onSubmit() {
     this.categoryService
       .createCategory({
         icon: this.categoryForm.value.icon || '',
         name: this.categoryForm.value.name || '',
       })
-      .subscribe((data) => {
-        this.toast.success('Category added successfully');
+      .pipe(
+        this.toast.observe({
+          loading: 'Creating category...',
+          error: 'Oops, something went wrong',
+          success: 'Category added successfully 🎉',
+        }),
+        catchError((error) => of(error))
+      )
+      .subscribe(() => {
+        this.categoryForm.reset({ icon: 'nerd_face' });
       });
   }
 }

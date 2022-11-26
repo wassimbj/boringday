@@ -1,9 +1,10 @@
+import { EmojiService } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from 'src/app/services/category.service';
 import { Category } from 'src/app/types';
 import { FormBuilder } from '@angular/forms';
 import { TasksService } from 'src/app/services/tasks.service';
-import { parse, parseISO } from 'date-fns';
+import { parseISO } from 'date-fns';
 import { HotToastService } from '@ngneat/hot-toast';
 import { catchError, of } from 'rxjs';
 
@@ -17,7 +18,8 @@ export class CreateTaskComponent implements OnInit {
     private categoryService: CategoryService,
     private taskService: TasksService,
     private toast: HotToastService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private emoji: EmojiService
   ) {}
 
   categories!: Category[];
@@ -31,6 +33,10 @@ export class CreateTaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCats();
+  }
+
+  getEmojiFromName(name: string) {
+    return this.emoji.getData(name, undefined, 'twitter')?.native;
   }
 
   isSubmitButtonDisabled(): boolean {
