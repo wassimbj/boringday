@@ -1,7 +1,7 @@
 <div class="max-w-2xl mx-auto p-5">
   <div *ngIf="categoryDetails">
     <div
-      class="px-5 py-3 rounded-full flex items-center justify-between bg-gray-100 mb-5"
+      class="px-5 py-1 rounded-full flex items-center justify-between bg-gray-100 mb-5"
     >
       <div class="flex items-center space-x-5">
         <span>
@@ -14,7 +14,12 @@
         </span>
         <span class="font-semibold"> {{ categoryDetails.name }} </span>
       </div>
-      <span class="font-semibold">{{ categoryDetails._count?.tasks }}</span>
+      <div class="p-2">
+        <span class="text-xs text-center block"> TASKS </span>
+        <span class="font-semibold block text-center">{{
+          categoryDetails._count?.tasks
+        }}</span>
+      </div>
     </div>
   </div>
 
