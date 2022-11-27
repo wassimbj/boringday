@@ -1,1 +1,51 @@
-<p>category-tasks works!</p>
+<div class="max-w-2xl mx-auto p-5">
+  <div *ngIf="categoryDetails">
+    <div
+      class="px-5 py-3 rounded-full flex items-center justify-between bg-gray-100 mb-5"
+    >
+      <div class="flex items-center space-x-5">
+        <span>
+          <ngx-emoji
+            class="flex items-center justify-center"
+            emoji="{{ categoryDetails.icon }}"
+            [size]="35"
+            set="twitter"
+          ></ngx-emoji>
+        </span>
+        <span class="font-semibold"> {{ categoryDetails.name }} </span>
+      </div>
+      <span class="font-semibold">{{ categoryDetails._count?.tasks }}</span>
+    </div>
+  </div>
+
+  <div *ngIf="tasks.isLoading">
+    <p class="p-10 mt-5 text-center text-lg">Loading...</p>
+  </div>
+  <div *ngIf="!tasks.isLoading && tasks.items.length === 0">
+    <div class="mt-10 p-5">
+      <span class="text-5xl block text-center mb-3">🎉</span>
+      <span class="block text-center text-lg">
+        Yayyy, you have nothing to do today, <br />
+        try going for a walk
+      </span>
+    </div>
+  </div>
+
+  <div
+    class="w-full space-y-3"
+    *ngIf="!tasks.isLoading && tasks.items.length > 0"
+  >
+    <div *ngFor="let task of tasks.items; let idx = index">
+      <span
+        *ngIf="
+          isSameDate(task.date, dateOfTasks) && idx != 0
+            ? false
+            : updateDateOfTasks(task.date)
+        "
+        class="font-semibold mt-8 block mb-1"
+        >{{ newDate(dateOfTasks) | dfnsFormat: "EEEE, dd MMM yyyy" }}</span
+      >
+      <app-task-card [task]="task" (onDelete)="refreshTasks()"></app-task-card>
+    </div>
+  </div>
+</div>

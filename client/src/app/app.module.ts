@@ -17,8 +17,8 @@ import { EditTaskComponent } from './pages/edit-task/edit-task.component';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 import { ModalModule } from 'angular-custom-modal';
-import { CategoryCardComponent } from './components/category-card/category-card.component';
 import { CategoryTasksComponent } from './pages/category-tasks/category-tasks.component';
+import { CategoryCardComponent } from './components/category-card/category-card.component';
 import { EditCategoryComponent } from './pages/edit-category/edit-category.component';
 
 @NgModule({
@@ -29,11 +29,11 @@ import { EditCategoryComponent } from './pages/edit-category/edit-category.compo
     CategoriesComponent,
     CreateCategoryComponent,
     CalendarComponent,
-    TaskCardComponent,
     EditTaskComponent,
     CategoryCardComponent,
     CategoryTasksComponent,
     EditCategoryComponent,
+    TaskCardComponent,
   ],
   imports: [
     DateFnsModule.forRoot(),

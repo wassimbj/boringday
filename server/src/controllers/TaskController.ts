@@ -123,15 +123,19 @@ class TaskController {
   public async getTasksByCategory(req: Request, res: Response) {
     try {
       const { category } = req.params;
-      // console.log(category);
       const tasks = await DB.task.findMany({
         where: { categoryId: Number(category) },
+        orderBy: {
+          date: "desc",
+        },
         include: {
           category: {
             select: { id: true, icon: true, name: true },
           },
         },
       });
+
+      // console.log(tasks);
 
       return res.status(200).json(tasks);
     } catch (err) {

@@ -102,6 +102,11 @@ class CategoryController {
         select: {
           icon: true,
           name: true,
+          _count: {
+            select: {
+              tasks: true,
+            },
+          },
         },
       });
 

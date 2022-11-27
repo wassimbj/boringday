@@ -33,4 +33,8 @@ export class TasksService {
   getTaskById(id: number): Observable<any> {
     return this.http.get(`${environment.serverUrl}/task/${id}`);
   }
+
+  getTasksByCategory(id: number): Observable<Task[]> {
+    return this.http.get<Task[]>(`${environment.serverUrl}/tasks/c/${id}`);
+  }
 }
