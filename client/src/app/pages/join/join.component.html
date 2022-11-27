@@ -1,1 +1,51 @@
-<p>join works!</p>
+<div class="mt-10 max-w-xl mx-auto p-5 rounded-md border">
+  <form [formGroup]="joinForm" (ngSubmit)="onSubmit()">
+    <div>
+      <h1 class="text-2xl font-semibold text-center mb-5">
+        Create your account
+      </h1>
+    </div>
+    <div class="my-3">
+      <label class="block font-semibold text-sm mb-2" for="email"
+        >Fullname</label
+      >
+      <input
+        class="focus:border-gray-900 px-4 w-full border-2 py-2 rounded-md text-sm outline-none"
+        type="text"
+        formControlName="fullname"
+        placeholder="fullname"
+        required
+      />
+    </div>
+    <div class="my-3">
+      <label class="block font-semibold text-sm mb-2" for="email">Email</label>
+      <input
+        class="focus:border-gray-900 px-4 w-full border-2 py-2 rounded-md text-sm outline-none"
+        type="email"
+        formControlName="email"
+        placeholder="email"
+        required
+      />
+    </div>
+    <div class="mt-5">
+      <label class="block font-semibold text-sm mb-2" for="password"
+        >Password</label
+      >
+      <input
+        class="focus:border-gray-900 px-4 w-full border-2 py-2 rounded-md text-sm outline-none"
+        type="password"
+        formControlName="password"
+        placeholder="password"
+        required
+      />
+    </div>
+    <div class="">
+      <button
+        type="submit"
+        class="mt-4 active:scale-95 font-semibold mb-3 w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-full transition duration-100"
+      >
+        Create my account
+      </button>
+    </div>
+  </form>
+</div>

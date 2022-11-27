@@ -8,6 +8,7 @@ import { CreateTaskComponent } from './pages/create-task/create-task.component';
 import { EditCategoryComponent } from './pages/edit-category/edit-category.component';
 import { EditTaskComponent } from './pages/edit-task/edit-task.component';
 import { HomeComponent } from './pages/home/home.component';
+import { JoinComponent } from './pages/join/join.component';
 import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
       { path: 'category/:id', component: CategoryTasksComponent },
       { path: 'category/edit/:id', component: EditCategoryComponent },
       { path: 'login', component: LoginComponent },
+      { path: 'join', component: JoinComponent },
     ],
   },
 ];

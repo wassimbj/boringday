@@ -1,13 +1,13 @@
 <div class="mt-10 max-w-xl mx-auto p-5 rounded-md border">
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div>
-      <span class="text-sm text-gray-900">Welcome back</span>
-      <h1 class="text-2xl font-bold">Login to your account</h1>
+    <div class="mb-10">
+      <span class="block text-sm text-center text-gray-900">Welcome back</span>
+      <h1 class="text-2xl text-center font-bold">Login to your account</h1>
     </div>
     <div class="my-3">
       <label class="block font-semibold text-sm mb-2" for="email">Email</label>
       <input
-        class="px-4 w-full border-2 py-2 rounded-md text-sm outline-none"
+        class="focus:border-gray-900 px-4 w-full border-2 py-2 rounded-md text-sm outline-none"
         type="email"
         formControlName="email"
         placeholder="email"
@@ -18,7 +18,7 @@
         >Password</label
       >
       <input
-        class="px-4 w-full border-2 py-2 rounded-md text-sm outline-none"
+        class="focus:border-gray-900 px-4 w-full border-2 py-2 rounded-md text-sm outline-none"
         type="password"
         formControlName="password"
         placeholder="password"
@@ -27,7 +27,7 @@
     <div class="">
       <button
         type="submit"
-        class="mt-4 mb-3 w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-md transition duration-100"
+        class="mt-4 active:scale-95 font-semibold mb-3 w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-full transition duration-100"
       >
         Login
       </button>

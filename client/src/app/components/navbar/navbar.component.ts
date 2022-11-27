@@ -9,18 +9,15 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NavbarComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
-  isUserLoggedIn: { isLoading: boolean; status: boolean } = {
-    isLoading: true,
-    status: false,
-  };
+  isUserLoggedIn: boolean = false;
 
   ngOnInit(): void {
     this.authService.getLoggedInUser().subscribe({
       error: () => {
-        this.isUserLoggedIn = { isLoading: false, status: false };
+        this.isUserLoggedIn = false;
       },
       next: () => {
-        this.isUserLoggedIn = { isLoading: false, status: true };
+        this.isUserLoggedIn = true;
       },
     });
   }

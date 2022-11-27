@@ -1,12 +1,4 @@
-<div
-  class="bg-black flex items-center p-3 px-7"
-  *ngIf="isUserLoggedIn.isLoading"
-> <span class="text-white">LOADING...</span> </div>
-
-<div
-  class="bg-black flex items-center p-3 px-7"
-  *ngIf="isUserLoggedIn.status && !isUserLoggedIn.isLoading"
->
+<div class="bg-black flex items-center p-3 px-7" *ngIf="isUserLoggedIn">
   <div class="flex-1">
     <a routerLink="" class="text-white block text-2xl font-black">boringday</a>
   </div>
@@ -54,6 +46,26 @@
           </div>
         </details>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="py-3 px-10 border-b" *ngIf="!isUserLoggedIn">
+  <div class="flex items-center justify-between">
+    <span class="font-bold text-lg">boringday</span>
+    <div class="flex items-center space-x-5">
+      <a
+        routerLink="/login"
+        class="rounded-full active:scale-95 px-5 py-2 inline-block border hover:bg-gray-100 transition-all"
+      >
+        Login
+      </a>
+      <a
+        routerLink="/join"
+        class="rounded-full active:scale-95 px-5 py-2 inline-block bg-zinc-800 text-white hover:bg-black transition-all"
+      >
+        Create account
+      </a>
     </div>
   </div>
 </div>
