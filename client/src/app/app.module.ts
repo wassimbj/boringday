@@ -20,6 +20,11 @@ import { ModalModule } from 'angular-custom-modal';
 import { CategoryTasksComponent } from './pages/category-tasks/category-tasks.component';
 import { CategoryCardComponent } from './components/category-card/category-card.component';
 import { EditCategoryComponent } from './pages/edit-category/edit-category.component';
+import { TaskDetailsModalComponent } from './components/task-details-modal/task-details-modal.component';
+import { LoginComponent } from './pages/login/login.component';
+import { JoinComponent } from './pages/join/join.component';
+import { AuthGuard } from './guards/auth.guard';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +39,10 @@ import { EditCategoryComponent } from './pages/edit-category/edit-category.compo
     CategoryTasksComponent,
     EditCategoryComponent,
     TaskCardComponent,
+    TaskDetailsModalComponent,
+    LoginComponent,
+    JoinComponent,
+    NavbarComponent,
   ],
   imports: [
     DateFnsModule.forRoot(),
@@ -43,13 +52,13 @@ import { EditCategoryComponent } from './pages/edit-category/edit-category.compo
     HttpClientModule,
     ReactiveFormsModule,
     HotToastModule.forRoot({
-      position: 'top-left',
+      // position: 'top-left',
     }),
     PickerModule,
     EmojiModule,
     ModalModule,
   ],
-  providers: [FormBuilder],
+  providers: [FormBuilder, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

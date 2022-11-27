@@ -3,6 +3,8 @@ import CategoryController from "./controllers/CategoryController";
 const app = express();
 import TaskController from "./controllers/TaskController";
 import cors from "cors";
+import session from "express-session";
+import AuthController from "./controllers/AuthController";
 
 app.use(express.json());
 
@@ -13,9 +15,46 @@ app.use(
   })
 );
 
+app.use(
+  session({
+    name: "ssid",
+    secret: process.env.SESSION_KEY as unknown as string, // Put whatever here
+    resave: true,
+    saveUninitialized: true,
+    unset: "destroy",
+    cookie: {
+      // secure: process.env.IS_PROD as unknown as boolean,
+      // httpOnly: process.env.IS_PROD as unknown as boolean,
+      maxAge: 864000000, // 10 days in ms
+      // sameSite: "none",
+      // domain: process.env.WEBSITE_URL,
+    },
+  })
+);
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
+app.post(
+  "/auth/login",
+  AuthController.isNotAuthenticated,
+  AuthController.login
+);
+
+app.post(
+  "/auth/join",
+  AuthController.isNotAuthenticated,
+  AuthController.createAccount
+);
+
+app.get(
+  "/auth/me",
+  AuthController.isAuthenticated,
+  AuthController.getLoggedInUser
+);
+
+app.get("/auth/logout", AuthController.isAuthenticated, AuthController.logout);
 
 app.post("/task/create", TaskController.create);
 app.post("/task/update", TaskController.update);

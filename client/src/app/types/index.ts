@@ -26,3 +26,10 @@ export type Category = {
     tasks: number;
   };
 };
+
+export type UserData = {
+  fullname?: string;
+  email: string;
+  password: string;
+  image?: string;
+};

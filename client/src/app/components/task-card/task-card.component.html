@@ -1,8 +1,11 @@
 <div class="flex group items-center w-full">
-  <span title="At..." class="flex px-2 py-1 rounded-full text-sm bg-[#e6dfdd]">{{
-    newDate(task.time) | dfnsFormat: "hh:mm bbbb"
-  }}</span>
+  <span
+    title="At..."
+    class="flex px-2 py-1 rounded-full text-sm bg-[#e6dfdd]"
+    >{{ newDate(task.time) | dfnsFormat: "hh:mm bbbb" }}</span
+  >
   <div
+    (click)="htmlInsideModal.open()"
     class="flex w-full p-3 rounded-md shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer bg-white max-w-md ml-2 font-semibold items-center justify-between overflow-hidden"
   >
     <div class="flex w-full font-semibold items-center">
@@ -50,3 +53,9 @@
     </div>
   </details>
 </div>
+
+<modal #htmlInsideModal>
+  <ng-template #modalBody>
+    <app-task-details-modal [taskId]="task.id"></app-task-details-modal>
+  </ng-template>
+</modal>

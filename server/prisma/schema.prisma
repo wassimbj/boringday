@@ -10,6 +10,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id       Int     @id @default(autoincrement())
+  fullname String
+  email    String
+  password String
+  image    String?
+  // tasks    Task[]
+}
+
 model Task {
   id         Int       @id @default(autoincrement())
   title      String
@@ -21,6 +30,8 @@ model Task {
   isDone     Boolean   @default(false)
   category   Category? @relation(fields: [categoryId], references: [id])
   categoryId Int?
+  // User       User?     @relation(fields: [createdBy], references: [id])
+  // createdBy  Int
 }
 
 // https://javascript.plainenglish.io/add-emoji-to-your-angular-application-c753e0d5cf84

@@ -3,8 +3,11 @@
     "sourceMap": true,
     "outDir": "dist",
     "rootDir": "src",
+    "moduleResolution": "Node",
     "strict": true,
     "lib": ["esnext"],
-    "esModuleInterop": true
-  }
+    "esModuleInterop": true,
+    "typeRoots": ["./src/@types", "./node_modules/@types"]
+  },
+  "include": ["./src/**/*.ts"]
 }

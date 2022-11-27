@@ -11,22 +11,32 @@ export class CategoryService {
   constructor(private http: HttpClient) {}
 
   createCategory(data: Category): Observable<any> {
-    return this.http.post(`${environment.serverUrl}/category/create`, data);
+    return this.http.post(`${environment.serverUrl}/category/create`, data, {
+      withCredentials: true,
+    });
   }
 
   getCategories(): Observable<any> {
-    return this.http.get(`${environment.serverUrl}/categories`);
+    return this.http.get(`${environment.serverUrl}/categories`, {
+      withCredentials: true,
+    });
   }
 
   updateCategory(data: Category): Observable<any> {
-    return this.http.post(`${environment.serverUrl}/category/update`, data);
+    return this.http.post(`${environment.serverUrl}/category/update`, data, {
+      withCredentials: true,
+    });
   }
 
   deleteCategory(id: number): Observable<any> {
-    return this.http.get(`${environment.serverUrl}/category/delete/${id}`);
+    return this.http.get(`${environment.serverUrl}/category/delete/${id}`, {
+      withCredentials: true,
+    });
   }
 
   getCategoryById(id: number): Observable<any> {
-    return this.http.get(`${environment.serverUrl}/category/${id}`);
+    return this.http.get(`${environment.serverUrl}/category/${id}`, {
+      withCredentials: true,
+    });
   }
 }
