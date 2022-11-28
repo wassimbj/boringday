@@ -11,12 +11,13 @@ datasource db {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  fullname String
-  email    String
-  password String
-  image    String?
-  // tasks    Task[]
+  id         Int        @id @default(autoincrement())
+  fullname   String
+  email      String
+  password   String
+  image      String?
+  tasks      Task[]
+  categories Category[]
 }
 
 model Task {
@@ -28,16 +29,18 @@ model Task {
   createdAt  DateTime  @default(now())
   notes      String
   isDone     Boolean   @default(false)
-  category   Category? @relation(fields: [categoryId], references: [id])
+  category   Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   categoryId Int?
-  // User       User?     @relation(fields: [createdBy], references: [id])
-  // createdBy  Int
+  User       User?     @relation(fields: [createdBy], references: [id], onDelete: Cascade)
+  createdBy  Int
 }
 
 // https://javascript.plainenglish.io/add-emoji-to-your-angular-application-c753e0d5cf84
 model Category {
-  id    Int    @id @default(autoincrement())
-  icon  String
-  name  String
-  tasks Task[]
+  id     Int    @id @default(autoincrement())
+  icon   String
+  name   String
+  tasks  Task[]
+  User   User?  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int?
 }

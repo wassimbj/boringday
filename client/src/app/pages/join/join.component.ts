@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HotToastService } from '@ngneat/hot-toast';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class JoinComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private toast: HotToastService // private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -23,6 +24,14 @@ export class JoinComponent implements OnInit {
     password: '',
   });
 
+  isSubmitBtnDisabled(): boolean {
+    return (
+      !this.joinForm.value.email ||
+      !this.joinForm.value.password ||
+      !this.joinForm.value.fullname
+    );
+  }
+
   onSubmit() {
     this.authService
       .register({
@@ -30,8 +39,17 @@ export class JoinComponent implements OnInit {
         email: this.joinForm.value.email!,
         password: this.joinForm.value.password!,
       })
-      .subscribe((res) => {
-        window.location.href = '/';
+      .subscribe({
+        error: (err) => {
+          if (err?.status >= 500) {
+            this.toast.error('Something went wrong, please try again later');
+          } else {
+            this.toast.warning('Wrong email or password');
+          }
+        },
+        next: () => {
+          window.location.href = '/';
+        },
       });
   }
 }

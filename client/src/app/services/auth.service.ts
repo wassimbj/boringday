@@ -42,4 +42,10 @@ export class AuthService {
       withCredentials: true,
     });
   }
+
+  logout(): Observable<any> {
+    return this.http.get(`${environment.serverUrl}/auth/logout`, {
+      withCredentials: true,
+    });
+  }
 }

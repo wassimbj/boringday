@@ -1,5 +1,8 @@
-<div class="bg-black flex items-center p-3 px-7" *ngIf="isUserLoggedIn">
-  <div class="flex-1">
+<div
+  class="bg-black flex items-center justify-between p-3 px-7"
+  *ngIf="loggedInUser"
+>
+  <div class="">
     <a routerLink="" class="text-white block text-2xl font-black">boringday</a>
   </div>
   <div class="flex items-center space-x-5">
@@ -19,8 +22,27 @@
       Home
     </a>
   </div>
-  <div class="flex-1">
-    <div class="flex justify-end">
+  <div class="">
+    <div class="flex items-center space-x-5">
+      <div class="relative">
+        <details class="relative">
+          <summary
+            class="list-none cursor-pointer active:scale-95 transition-transform text-center bg-yellow-50 text-yellow-500 rounded-full font-semibold text-xl flex items-center justify-center w-12 h-12"
+          >
+            {{ loggedInUser.fullname[0] | uppercase }}
+          </summary>
+          <div
+            class="absolute w-44 top-12 right-0 bg-white rounded-md shadow-md p-3 overflow-hidden"
+          >
+            <button
+              (click)="handleLogout()"
+              class="rounded-md text-left w-full p-2 font-semibold block hover:bg-gray-100 transition-colors"
+            >
+              Logout
+            </button>
+          </div>
+        </details>
+      </div>
       <div class="relative">
         <details class="relative">
           <summary
@@ -50,9 +72,9 @@
   </div>
 </div>
 
-<div class="py-3 px-10 border-b" *ngIf="!isUserLoggedIn">
+<div class="py-3 px-10 border-b" *ngIf="!loggedInUser">
   <div class="flex items-center justify-between">
-    <span class="font-bold text-lg">boringday</span>
+    <span class="font-black text-lg">boringday</span>
     <div class="flex items-center space-x-5">
       <a
         routerLink="/login"

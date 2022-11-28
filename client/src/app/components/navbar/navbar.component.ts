@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { HotToastService } from '@ngneat/hot-toast';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -7,17 +9,40 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private toast: HotToastService
+  ) {
+    // this.checkLoggedInUser();
+  }
 
-  isUserLoggedIn: boolean = false;
+  loggedInUser: { fullname: string; id: number } | null = null;
 
   ngOnInit(): void {
+    this.checkLoggedInUser();
+  }
+
+  checkLoggedInUser() {
     this.authService.getLoggedInUser().subscribe({
       error: () => {
-        this.isUserLoggedIn = false;
+        this.loggedInUser = null;
+      },
+      next: (data) => {
+        this.loggedInUser = data;
+      },
+    });
+  }
+
+  handleLogout() {
+    this.authService.logout().subscribe({
+      error: () => {
+        this.toast.error('Oops, something went wrong :(');
       },
       next: () => {
-        this.isUserLoggedIn = true;
+        this.checkLoggedInUser();
+        this.router.navigateByUrl('/login');
+        this.toast.success('See you later 👋🏼');
       },
     });
   }

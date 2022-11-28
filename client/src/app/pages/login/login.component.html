@@ -11,6 +11,7 @@
         type="email"
         formControlName="email"
         placeholder="email"
+        required
       />
     </div>
     <div class="mt-5">
@@ -22,12 +23,14 @@
         type="password"
         formControlName="password"
         placeholder="password"
+        required
       />
     </div>
     <div class="">
       <button
         type="submit"
-        class="mt-4 active:scale-95 font-semibold mb-3 w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-full transition duration-100"
+        [disabled]="isSubmitBtnDisabled()"
+        class="mt-4 active:scale-95 disabled:bg-gray-300 font-semibold mb-3 w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-full transition duration-100"
       >
         Login
       </button>

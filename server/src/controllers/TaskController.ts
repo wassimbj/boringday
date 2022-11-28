@@ -13,10 +13,8 @@ type TaskBody = {
 class TaskController {
   public async create(req: Request, res: Response) {
     try {
-      // console.log(req.body)
-
       const { title, notes, category, dateTime }: TaskBody = req.body;
-
+      const userId = req.session!.userId!;
       await DB.task.create({
         data: {
           date: new Date(dateTime),
@@ -24,6 +22,7 @@ class TaskController {
           notes,
           title,
           categoryId: category,
+          createdBy: userId,
         },
       });
 
@@ -81,9 +80,10 @@ class TaskController {
       // console.log(req.body)
 
       const { date } = req.params;
+      const userId = req.session!.userId;
 
       const tasks = await DB.task.findMany({
-        where: { date: new Date(date) },
+        where: { date: new Date(date), createdBy: userId },
         include: {
           category: {
             select: { icon: true, name: true },
@@ -102,9 +102,10 @@ class TaskController {
   public async getTaskById(req: Request, res: Response) {
     try {
       const { id } = req.params;
+      const userId = req.session!.userId;
 
       const task = await DB.task.findFirst({
-        where: { id: Number.parseInt(id) },
+        where: { id: Number.parseInt(id), createdBy: userId },
         include: {
           category: {
             select: { id: true, icon: true, name: true },
@@ -123,8 +124,10 @@ class TaskController {
   public async getTasksByCategory(req: Request, res: Response) {
     try {
       const { category } = req.params;
+      const userId = req.session!.userId;
+
       const tasks = await DB.task.findMany({
-        where: { categoryId: Number(category) },
+        where: { categoryId: Number(category), createdBy: userId },
         orderBy: {
           date: "desc",
         },
@@ -148,11 +151,14 @@ class TaskController {
   public async getNumberOfTasksOfGivenWeek(req: Request, res: Response) {
     try {
       const { date } = req.params; // start of the week 1-31
+      const userId = req.session!.userId;
+
       const startOfWeekDate = startOfWeek(new Date(date), { weekStartsOn: 1 });
       const tasks = await DB.task.groupBy({
         by: ["date"],
         where: {
           date: { gte: startOfWeekDate, lte: addDays(startOfWeekDate, 7) },
+          createdBy: userId,
         },
         _count: {
           id: true,

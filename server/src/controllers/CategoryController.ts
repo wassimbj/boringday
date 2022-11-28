@@ -10,11 +10,12 @@ class CategoryController {
   public async create(req: Request, res: Response) {
     try {
       const { name, icon }: CategoryBody = req.body;
-
+      const userId = req.session!.userId!;
       await DB.category.create({
         data: {
           name,
           icon,
+          userId,
         },
       });
 
@@ -27,7 +28,10 @@ class CategoryController {
 
   public async getCategories(req: Request, res: Response) {
     try {
+      const userId = req.session!.userId!;
+
       const categories = await DB.category.findMany({
+        where: { userId },
         select: {
           icon: true,
           id: true,
