@@ -7,17 +7,27 @@
       class="px-2 py-3 rounded-t-md shadow-sm border flex items-center justify-between"
     >
       <span class="px-2 font-semibold">📖 Category</span>
-      <span class="px-2 text-right">Work</span>
+      <div class="flex items-center">
+        <ngx-emoji
+          class="flex items-center justify-center"
+          emoji="{{ task.category?.icon }}"
+          [size]="22"
+          set="twitter"
+        ></ngx-emoji>
+        <span class="px-2 text-right">{{ task.category?.name }}</span>
+      </div>
     </div>
     <div class="px-2 py-3 shadow-sm border flex items-center justify-between">
       <span class="px-2 font-semibold">📅 Date</span>
-      <span class="px-2 text-right">23 Dec 2022, 10:00 a.m</span>
+      <span class="px-2 text-right"
+        >{{ newDate(task.date) | dfnsFormat: "dd LLL yyyy" }},
+        {{ newDate(task.time) | dfnsFormat: "hh:mm bbbb" }}</span
+      >
     </div>
     <div class="px-2 py-3 shadow-sm border">
       <span class="px-2 font-semibold">📝 Note</span>
       <p class="px-2">
-        Ut non dicta voluptas ullam beatae ad corrupti. Magnam eaque
-        reprehenderit earum dicta. Eligendi id non qui consequatur.
+        {{ task.notes || "N/A" }}
       </p>
     </div>
     <!-- <div class="px-2 py-3 shadow-sm border">

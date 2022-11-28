@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { TasksService } from 'src/app/services/tasks.service';
 import { Task } from 'src/app/types';
 
 @Component({
@@ -7,13 +8,22 @@ import { Task } from 'src/app/types';
   styleUrls: ['./task-details-modal.component.css'],
 })
 export class TaskDetailsModalComponent implements OnInit {
-  constructor() {}
+  constructor(private taskService: TasksService) {}
 
   @Input() taskId!: number;
 
-  task = {
-    title: "OK"
+  task!: Task;
+
+  newDate(d?: string | Date): Date {
+    if (d) {
+      return new Date(d);
+    }
+    return new Date();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.taskService.getTaskById(this.taskId).subscribe((data) => {
+      this.task = data;
+    });
+  }
 }
