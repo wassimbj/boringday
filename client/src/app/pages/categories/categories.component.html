@@ -14,12 +14,32 @@
   >
     Loading...
   </div>
+
+  <div
+    *ngIf="!categories.isLoading && categories.items.length === 0"
+    class="text-center p-10"
+  >
+    <span class="text-5xl block text-center mb-5">🤔</span>
+    <span class="block text-xl text-center text-gray-400">
+      You didn't create any categories yet.
+    </span>
+    <a
+      routerLink="/category/create"
+      class="rounded-full px-5 transition-colors active:scale-95 inline-block py-2 border border-gray-400 mt-5 hover:bg-black hover:text-white font-semibold"
+    >
+      Add Category
+    </a>
+  </div>
+
   <div
     class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5"
     *ngIf="!categories.isLoading && categories.items.length > 0"
   >
     <div *ngFor="let category of categories.items">
-      <app-category-card [category]="category" (onDelete)="refreshCategories()"></app-category-card>
+      <app-category-card
+        [category]="category"
+        (onDelete)="refreshCategories()"
+      ></app-category-card>
     </div>
   </div>
 </div>

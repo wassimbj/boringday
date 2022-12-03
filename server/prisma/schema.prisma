@@ -11,28 +11,40 @@ datasource db {
 }
 
 model User {
-  id         Int        @id @default(autoincrement())
+  id         Int          @id @default(autoincrement())
   fullname   String
   email      String
   password   String
   image      String?
   tasks      Task[]
   categories Category[]
+  SharedTask SharedTask[]
 }
 
 model Task {
-  id         Int       @id @default(autoincrement())
+  id         Int          @id @default(autoincrement())
   title      String
-  date       DateTime  @db.Date
-  time       DateTime  @db.Time(0)
+  date       DateTime     @db.Date
+  time       DateTime     @db.Time(0)
   reminder   DateTime?
-  createdAt  DateTime  @default(now())
+  createdAt  DateTime     @default(now())
   notes      String
-  isDone     Boolean   @default(false)
-  category   Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  isDone     Boolean      @default(false)
+  category   Category?    @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   categoryId Int?
-  User       User?     @relation(fields: [createdBy], references: [id], onDelete: Cascade)
+  User       User?        @relation(fields: [createdBy], references: [id], onDelete: Cascade)
   createdBy  Int
+  SharedTask SharedTask[]
+}
+
+// select * from tasks left join sharedTask on tasks.id = sharedTask.taskId where sharedTask.userId = 1 OR task.userId = 1
+
+model SharedTask {
+  id         Int  @id @default(autoincrement())
+  taskId     Int
+  sharedWith Int
+  task       Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user       User @relation(fields: [sharedWith], references: [id], onDelete: Cascade)
 }
 
 // https://javascript.plainenglish.io/add-emoji-to-your-angular-application-c753e0d5cf84
@@ -43,4 +55,10 @@ model Category {
   tasks  Task[]
   User   User?  @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int?
+}
+
+model Sessions {
+  session_id String @id
+  expires    Int
+  data       String @db.MediumText
 }
