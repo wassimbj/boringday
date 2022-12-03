@@ -77,8 +77,6 @@ class TaskController {
   // get date tasks
   public async getTasksByDate(req: Request, res: Response) {
     try {
-      // console.log(req.body)
-
       const { date } = req.params;
       const userId = req.session!.userId;
 
