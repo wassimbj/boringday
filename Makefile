@@ -1,6 +1,6 @@
 
 ui:
-	@cd client && npm.cmd start
+	@cd client && ng serve -o
 
 
 .PHONY: server

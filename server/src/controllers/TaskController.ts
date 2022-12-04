@@ -127,7 +127,7 @@ class TaskController {
       const tasks = await DB.task.findMany({
         where: { categoryId: Number(category), createdBy: userId },
         orderBy: {
-          date: "desc",
+          date: "asc",
         },
         include: {
           category: {
