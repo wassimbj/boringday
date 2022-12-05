@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Category, CreateTaskBody, Task, UserData } from '../types';
+import { UserData } from '../types';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

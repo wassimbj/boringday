@@ -45,26 +45,6 @@ class AuthController {
     }
   }
 
-  // update login info (email, password)
-  public async updateLoginInfo(req: Request, res: Response) {
-    try {
-      const { email, password } = req.body;
-      const hashedPassword = bcrypt.hashSync(password, 10);
-      const dataToUpdate: { email: string; password?: string } = { email };
-      if (password) {
-        dataToUpdate.password = hashedPassword;
-      }
-
-      const user = await DB.user.update({
-        where: { id: req.session!.userId },
-        data: dataToUpdate,
-      });
-      return res.status(200).json(user);
-    } catch (err) {
-      return res.status(500).json("Something is wrong");
-    }
-  }
-
   // get logged in user
   public async getLoggedInUser(req: Request, res: Response) {
     try {

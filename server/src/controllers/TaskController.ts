@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import DB from "../db";
-import { addDays, format, startOfWeek } from "date-fns";
+import { addDays, startOfWeek } from "date-fns";
 
 type TaskBody = {
   id: number;

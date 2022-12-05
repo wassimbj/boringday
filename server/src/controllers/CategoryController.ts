@@ -6,6 +6,7 @@ type CategoryBody = {
   name: string;
   icon: string;
 };
+
 class CategoryController {
   public async create(req: Request, res: Response) {
     try {
